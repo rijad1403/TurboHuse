@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Item;
 use App\Manufacturer;
+
+use function PHPSTORM_META\type;
 
 class ItemsController extends Controller
 {
@@ -14,12 +18,14 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
         $items = Item::all();
         $manufacturers = Manufacturer::all();
 
-        return view('items')->with(['items' => $items, 'manufacturers' => $manufacturers]);
+        return view('items.index')->with(['items' => $items, 'manufacturers' => $manufacturers, 'filterMessage' => '']);
     }
 
     /**
@@ -28,9 +34,7 @@ class ItemsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-
     {
-        return view('items.create');
     }
 
     /**
@@ -39,18 +43,22 @@ class ItemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreItem $request)
     {
-        $item = new Item();
-        $item->title = $request->input('title');
-        $item->price = $request->input('price');
-        $item->manufacturer = $request->input('manufacturer');
-        $item->model = $request->input('model');
-        $item->quantity = $request->input('quantity');
-        $item->body = $request->input('body');
-        $item->releaseYear = $request->input('releaseYear');
-        $item->save();
-        return redirect('/items/create')->with('success', 'Artikl dodan.');
+
+        // $title = iconv('UTF-8', 'ASCII//TRANSLIT', $request->title);
+        $item = Item::where('title', $request->title)->get();
+        if (!$item->isEmpty()) {
+            return redirect('/admin/artikli')->with('warning', 'Postoji artikl sa nazivom ' . $request->title . '.');
+        }
+        $newItem = new Item();
+        $newItem->title = $request->title;
+        $newItem->price = $request->price;
+        $newItem->manufacturer_id = $request->car;
+        $newItem->body = $request->body;
+        $newItem->releaseYear = $request->releaseYear;
+        $newItem->save();
+        return redirect('/admin/artikli')->with('success', 'Artikl ' . "$request->title" . ' dodan.');
     }
 
     /**
@@ -62,7 +70,7 @@ class ItemsController extends Controller
     public function show($id)
     {
         $item = Item::find($id);
-        return view('items.item')->with('item', $item);
+        // return view('items.item')->with('item', $item);
     }
 
     /**
@@ -73,7 +81,9 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::find($id);
+        $manufacturers = Manufacturer::all();
+        return view('admin.items.edit')->with(['item' => $item, 'manufacturers' => $manufacturers]);
     }
 
     /**
@@ -83,9 +93,18 @@ class ItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+
+    public function update(StoreItem $request, $id)
     {
-        //
+        $item = Item::find($id);
+        $item->title = $request->title;
+        $item->price = $request->price;
+        $item->manufacturer_id = $request->car;
+        $item->body = $request->body;
+        $item->releaseYear = $request->releaseYear;
+        $item->save();
+        return redirect('/admin/artikli')->with('success', 'Artikl ' . "$request->title" . ' ažuriran.');
     }
 
     /**
@@ -97,5 +116,27 @@ class ItemsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $car = $request->car;
+        $maxPrice = $request->maxPrice;
+        $releaseYear = $request->releaseYear;
+        $manufacturers = Manufacturer::all();
+
+        $items = Item::when($car, function ($query, $car) {
+            return $query->where('manufacturer_id', $car);
+        })->when($maxPrice, function ($query, $maxPrice) {
+            return $query->where('price', '<=', $maxPrice);
+        })->when($releaseYear, function ($query, $releaseYear) {
+            return $query->where('releaseYear', $releaseYear);
+        })->get();
+
+        $carFilter = $car ? 'proizvođač = ' . $manufacturers->find($car)->title . ';' : '';
+        $maxPriceFilter = $maxPrice ? 'maximalna cijena = ' . $maxPrice . ' KM;' : '';
+        $releaseYearFilter = $releaseYear ? 'godina izdavanja = ' . $releaseYear . ';' : '';
+        $filterMessage = 'Pronađeno ' . $items->count() . ' rezultata: ' . $carFilter . ' ' . $maxPriceFilter . ' ' . $releaseYearFilter;
+        return view('items.index', ['items' => $items, 'manufacturers' => $manufacturers,])->with('filterMessage', $filterMessage);
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUser;
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -12,14 +14,13 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function myProfile()
-    {
-    }
 
     public function index()
     {
+        $users = User::paginate(2);
+        // dd($users);
 
-        return view('admin.users');
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -72,9 +73,17 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUser $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->type = $request->type;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
     }
 
     /**

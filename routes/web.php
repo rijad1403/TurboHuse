@@ -31,13 +31,24 @@ Route::get('/kosarica', function () {
 });
 
 Route::get('/artikli', 'ItemsController@index');
-Route::get('/items/create', 'ItemsController@create');
-Route::post('/items/store', 'ItemsController@store');
-ROute::get('/items/{item}', 'ItemsController@show');
+ROute::get('/artikli/{item}', 'ItemsController@show');
 
 
 // Admin
 
-Route::get('/admin', 'UsersController@myProfile');
+// Items
+
+Route::get('/admin/artikli', 'ItemsController@index');
+Route::post('/admin/artikli/save', 'ItemsController@store');
+Route::get('/admin/artikli/search', 'ItemsController@search');
+Route::get('/admin/artikli/{item}', 'ItemsController@edit');
+Route::put('/admin/artikli/{item}', 'ItemsController@update');
+Route::delete('/admin/artikli/{item}', 'ItemsController@destroy');
+
+// Manufacturers
+Route::post('/admin/proizvodjaci/save', 'ManufacturersController@store');
+
+
 Route::get('admin/korisnici', 'UsersController@index');
+Route::get('/admin/test', 'UsersController@test');
 Route::get('/admin/artikli', 'ItemsController@index');

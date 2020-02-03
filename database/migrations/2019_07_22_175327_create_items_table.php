@@ -19,9 +19,9 @@ class CreateItemsTable extends Migration
             $table->string('title');
             $table->longText('body');
             $table->double('price');
-            $table->integer('quantity');
             $table->year('releaseYear');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreManufacturer;
 use Illuminate\Http\Request;
 use App\Manufacturer;
 
 class ManufacturersController extends Controller
 {
-    public function index() {
-        $manufacturers = Manufacturer::all();
+    public function index()
+    {
     }
 
-    public function create() {
-        return view('manufacturers.create');
+    public function create()
+    {
     }
 
-    public function store(Request $request) {
-        $manufacturer = new Manufacturer();
-        $manufacturer->title = $request->input('title');
-        $manufacturer->save();
-        redirect('manufacturers/create');
+    public function store(StoreManufacturer $request)
+    {
+        $manufacturer = Manufacturer::where('title', $request->title)->get();
+        if (!$manufacturer->isEmpty()) {
+            return redirect('/admin/artikli')->with('warning', 'Postoji proizvođač sa nazivom ' . $request->title . '.');
+        } else {
+            $newManufacturer = new Manufacturer();
+            $newManufacturer->title = $request->title;
+            $newManufacturer->save();
+            return redirect('/admin/artikli');
+        }
     }
 }

@@ -18,7 +18,6 @@ class ItemsTableSeeder extends Seeder
         $item->title = 'Turbina za Peugeot 307';
         $item->manufacturer_id = 3;
         $item->price = 300;
-        $item->quantity = 10;
         $item->body = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum impedit facere voluptates tempore cumque!
                         Repellat necessitatibus odit 
                         eveniet atque culpa fugit ducimus, ea excepturi quae magni commodi? Inventore, adipisci magni?';
@@ -29,7 +28,6 @@ class ItemsTableSeeder extends Seeder
         $item2->title = 'Turbina za Audi A3';
         $item2->manufacturer_id = 1;
         $item2->price = 500;
-        $item2->quantity = 10;
         $item2->body = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum impedit facere voluptates tempore cumque!
                         Repellat necessitatibus odit 
                         eveniet atque culpa fugit ducimus, ea excepturi quae magni commodi? Inventore, adipisci magni?';
@@ -40,7 +38,6 @@ class ItemsTableSeeder extends Seeder
         $item3->title = 'Turbina za Golf 4';
         $item3->manufacturer_id = 2;
         $item3->price = 400;
-        $item3->quantity = 10;
         $item3->body = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum impedit facere voluptates tempore cumque!
                         Repellat necessitatibus odit 
                         eveniet atque culpa fugit ducimus, ea excepturi quae magni commodi? Inventore, adipisci magni?';
