@@ -116,30 +116,6 @@
     </div>
 </div>
 
-<script>
-    function addToCart(item) {
-        let cartItems = [];
-        const cartItem = {itemId: item.id, itemTitle: item.title, quantity: 1};
-        if(sessionStorage.getItem('cartItems')) {
-            cartItems = JSON.parse(sessionStorage.getItem('cartItems'));
-            const temp = cartItems.find(element => element.itemId == cartItem.itemId);
-            if(temp) {
-                cartItems.forEach(element => {
-                    if(element.itemId == cartItem.itemId) {
-                        element.quantity ++;
-                    }
-                });
-            } else {
-                cartItems.push(cartItem);
-                console.log(temp, cartItems);
-            }
-        } else {
-            cartItems.push(cartItem);
-        }
-    sessionStorage.setItem('cartItems',JSON.stringify(cartItems));
-   }
-</script>
-
 <div class="modal fade" id="newItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -138,24 +138,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    function selectUser(user) {
-        console.log(user);
-	    document.querySelector('#name').value = user.name;
-	    document.querySelector('#email').value = user.email;
-	    document.querySelector('#city').value = user.city;
-	    document.querySelector('#state').value = user.state;
-	    document.querySelector('#address').value = user.address;
-	    document.querySelector('#phone').value = user.phone;
-	    const types = document.querySelectorAll('option');
-	    types.forEach(type => {
-	        if (type.value == user.type) {
-	            type.selected = true;
-	        }
-	    });
-	}
-</script>
-
-
 @endsection
