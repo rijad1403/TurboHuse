@@ -2,17 +2,7 @@
 @section('content')
 
 <div class="container-fluid content">
-    <div class="row">
-        <div class="col-12 p-0">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">početna</a></li>
-                    <li class="breadcrumb-item">artikli</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-12">
             <h2>artikli</h2>
             <hr>
@@ -20,6 +10,7 @@
     </div>
     <div class="row items">
         <div class="col-sm-12 col-md-12 col-lg-3">
+            @if(Auth::user() && Auth::user()->type == "admin")
             <div class="form-group">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#newItem"><i
                         class="fas fa-plus-circle"></i> Dodaj artikl</button>
@@ -27,7 +18,8 @@
                     fa-plus-circle"></i> Dodaj
                     proizvođača</button>
             </div>
-            <form action="/admin/artikli/search" method="GET">
+            @endif
+            <form action="/artikli/search" method="GET">
                 <div class="form-group">
                     <label for="car-select"><i class="fas fa-car"></i> Proizvođač</label>
                     <select class="form-control" id="car-select" name="car">
@@ -48,7 +40,7 @@
                     <label for="cijena"><i class="fas fa-calendar"></i> Godina proizvodnje</label>
                     <input type="text" name="releaseYear" id="releaseYear" class="form-control" placeholder="Npr. 2005">
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Prikaži rezultate</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Pretraga artikala</button>
             </form>
         </div>
 
@@ -88,19 +80,30 @@
             </div>
             <div class="row">
                 @forelse ($items as $item)
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                     <div class="card item" style="width: 80%;">
-                        <a href=" /admin/artikli/{{$item->id}} " class="item-link">
-                            <img class="card-img-top" src=" {{asset('images/items/test.jpg')}} " alt="Card image cap">
-                        </a>
+                        <img class="card-img-top" src=" {{asset('images/items/test.jpg')}} " alt="Card image cap">
                         <div class="card-body">
                             <small class="text-muted">{{$item->manufacturer->title}}</small>
                             <h5 class="card-title">{{$item->title}}</h5>
                             <h5 class="card-title">{{$item->price}} KM</h5>
-                            <button class="btn btn-primary" onclick="addToCart({{ $item }})"><i
-                                    class="fas fa-cart-plus"></i>
-                                Dodaj u
-                                košaru</button>
+                            <div> <button class="btn btn-primary" onclick="addToCart({{ $item }})"><i
+                                        class="fas fa-cart-plus"></i>
+                                    Dodaj u
+                                    košaru</button></div>
+                            <div>
+                                <a class="btn btn-primary" href="/artikli/{{$item->id}}" role="button"
+                                    style="text-transform: initial; border-radius: 0;"><i
+                                        class="fas fa-info-circle"></i>
+                                    Opširnije</a>
+                            </div>
+                            @if (Auth::user() && Auth::user()->type == "admin")
+                            <div>
+                                <a class="btn btn-primary" href="/artikli/{{$item->id}}/uredi" role="button"
+                                    style="text-transform: initial; border-radius: 0;"><i class="fas fa-edit"></i>
+                                    Uredi artikl</a>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

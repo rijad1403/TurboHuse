@@ -25,7 +25,7 @@ class ItemsController extends Controller
         $items = Item::all();
         $manufacturers = Manufacturer::all();
 
-        return view('items.index')->with(['items' => $items, 'manufacturers' => $manufacturers, 'filterMessage' => '']);
+        return view('admin.items.index')->with(['items' => $items, 'manufacturers' => $manufacturers, 'filterMessage' => '']);
     }
 
     /**
@@ -45,7 +45,6 @@ class ItemsController extends Controller
      */
     public function store(StoreItem $request)
     {
-
         // $title = iconv('UTF-8', 'ASCII//TRANSLIT', $request->title);
         $item = Item::where('title', $request->title)->get();
         if (!$item->isEmpty()) {
@@ -70,7 +69,7 @@ class ItemsController extends Controller
     public function show($id)
     {
         $item = Item::find($id);
-        // return view('items.item')->with('item', $item);
+        return view('admin.items.show')->with('item', $item);
     }
 
     /**
@@ -104,7 +103,7 @@ class ItemsController extends Controller
         $item->body = $request->body;
         $item->releaseYear = $request->releaseYear;
         $item->save();
-        return redirect('/admin/artikli')->with('success', 'Artikl ' . "$request->title" . ' ažuriran.');
+        return redirect('/artikli')->with('success', 'Artikl ' . "$request->title" . ' ažuriran.');
     }
 
     /**
@@ -137,6 +136,6 @@ class ItemsController extends Controller
         $maxPriceFilter = $maxPrice ? 'maximalna cijena = ' . $maxPrice . ' KM;' : '';
         $releaseYearFilter = $releaseYear ? 'godina izdavanja = ' . $releaseYear . ';' : '';
         $filterMessage = 'Pronađeno ' . $items->count() . ' rezultata: ' . $carFilter . ' ' . $maxPriceFilter . ' ' . $releaseYearFilter;
-        return view('items.index', ['items' => $items, 'manufacturers' => $manufacturers,])->with('filterMessage', $filterMessage);
+        return view('admin.items.index', ['items' => $items, 'manufacturers' => $manufacturers,])->with('filterMessage', $filterMessage);
     }
 }

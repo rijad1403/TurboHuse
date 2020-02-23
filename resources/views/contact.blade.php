@@ -2,17 +2,7 @@
 @section('content')
 
 <div class="container-fluid content">
-    <div class="row">
-        <div class="col-12 p-0">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">početna</a></li>
-                    <li class="breadcrumb-item">kontakt</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-md-6">
             <h2>Kontakt forma</h2>
             <hr>
@@ -56,9 +46,9 @@
             </p>
             <div class="mapouter">
                 <div class="gmap_canvas">
-                    <iframe width="100%" height="400" id="gmap_canvas" 
-                    src="https://maps.google.com/maps?q=%20Lufthavnsvej%2025%209400%20N%C3%B8rresundby&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                    <iframe width="100%" height="400" id="gmap_canvas"
+                        src="https://maps.google.com/maps?q=%20Lufthavnsvej%2025%209400%20N%C3%B8rresundby&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
                     </iframe>
                 </div>
             </div>

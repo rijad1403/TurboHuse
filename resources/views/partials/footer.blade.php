@@ -1,5 +1,6 @@
 <!-- Footer -->
 <footer>
+    <div id="snackbar"></div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
@@ -50,6 +51,10 @@
         }
     localStorage.setItem('cartItems',JSON.stringify(cartItems));
     reloadCart();
+    var x = document.getElementById("snackbar");
+    x.innerHTML = `Artikl ${item.title} dodan u košaru.`
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
    }
 
     function reloadCart() {
@@ -60,7 +65,7 @@
             totalPrice = totalPrice + item.price * item.quantity;
         });
         document.querySelector('#totalPrice').textContent = `${totalPrice} KM`;
-        document.querySelector('#quantity').textContent = `${cartItems.length} artikala`;
+        document.querySelector('#quantity').textContent = cartItems.length === 1 ? `${cartItems.length} artikl` : `${cartItems.length} artikla`;
         } else {
             document.querySelector('#totalPrice').textContent = ``;
             document.querySelector('#quantity').textContent = ``;
@@ -115,8 +120,7 @@
             navLink.classList.add('active');
         } else {
             navLink.classList.remove('active');
-        }
-        
+        } 
     });
     
 

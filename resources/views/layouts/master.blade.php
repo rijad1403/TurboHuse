@@ -13,7 +13,10 @@
 <body>
     @include('partials.header')
     @include('partials.navbar')
+    @if (Route::current()->uri !== 'prijava' && Route::current()->uri !== 'registracija' && Route::current()->uri !==
+    'kosara' && Route::current()->uri !== 'profil')
     @include('partials.hero')
+    @endif
     @yield('content')
     @include('partials.footer')
     <script src="{{ asset('js/app.js') }}"></script>

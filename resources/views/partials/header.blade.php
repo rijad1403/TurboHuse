@@ -8,24 +8,13 @@
             </div>
             <div class="col-md-6 align-right">
                 <i class="fas fa-phone-square-alt"></i> 0045 50908163
-                <i class="fas fa-envelope"></i> office@turbohuse.com                      
-            </div>       
-        </div> 
+                <i class="fas fa-envelope"></i> office@turbohuse.com
+            </div>
+        </div>
         <div class="row">
             <div class="col-12 logo">
                 <img src=" {{asset('images/logo.png')}} " class="logo-image" alt="logo">
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 search">
-                <div class="search-form">
-                    <form action="" method="post">
-                        <div class="form-group">
-                            <input type="text" name="" id="" class="form-control" placeholder="Unesite pojam za pretragu...">
-                        </div>
-                    </form>
-                </div>
-            </div>  
-        </div>
-    </div>  
+    </div>
 </header>

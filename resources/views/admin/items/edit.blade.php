@@ -2,25 +2,14 @@
 @section('content')
 
 <div class="container-fluid content">
-    <div class="row">
-        <div class="col-12 p-0">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">administracija</a></li>
-                    <li class="breadcrumb-item">artikli</li>
-                    <li class="breadcrumb-item">novi artikl</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-12">
-            <h2>novi artikl</h2>
+            <h2>{{ $item->title }} </h2>
             <hr>
         </div>
     </div>
-    <div class="row items">
-        <div class="col-sm-12 col-md-12 col-lg-3">
+    <div class="row items justify-content-center">
+        <div class="col-lg-4">
             @if ($errors->any())
             @foreach ($errors->all() as $error)
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -31,7 +20,7 @@
             </div>
             @endforeach
             @endif
-            <form action="/admin/artikli/{{ $item->id }}" method="POST">
+            <form action="/artikli/{{ $item->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

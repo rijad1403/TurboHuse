@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUser;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -95,5 +96,13 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function myProfile()
+    {
+        if (Auth::check()) {
+            return view('profile.index', ['user' => Auth::user()]);
+        }
+        return view('login');
     }
 }

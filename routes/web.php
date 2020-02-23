@@ -13,46 +13,29 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/onama', function () {
-    return view('about');
-});
-
-Route::get('/kontakt', function () {
-    return view('contact');
-});
-
-Route::get('/kosara', function () {
-    return view('cart.index');
-});
-
-Route::get('/artikli', 'ItemsController@index');
-ROute::get('/artikli/{item}', 'ItemsController@show');
-
-
 // Guest
+Route::view('/prijava', 'login');
+Route::view('/registracija', 'registration');
+Route::get('/authenticate', 'Auth\LoginController@authenticate');
 
+// Guest, user, admin
+Route::get('/', 'ItemsController@index');
+Route::get('/artikli', 'ItemsController@index');
+Route::view('/onama', 'about');
+Route::view('/kontakt', 'contact');
 Route::view('/kosara', 'cart.index');
+Route::get('/artikli/search', 'ItemsController@search');
+Route::get('/artikli/{item}', 'ItemsController@show');
 
+// User, admin
+Route::get('/profil', 'UsersController@myProfile');
+Route::get('/odjava', 'Auth\LoginController@logout');
 
 // Admin
-
-// Admin - Items
-
-Route::get('/admin/artikli', 'ItemsController@index');
-Route::post('/admin/artikli/save', 'ItemsController@store');
-Route::get('/admin/artikli/search', 'ItemsController@search');
-Route::get('/admin/artikli/{item}', 'ItemsController@edit');
-Route::put('/admin/artikli/{item}', 'ItemsController@update');
-Route::delete('/admin/artikli/{item}', 'ItemsController@destroy');
-
-// Admin - Manufacturers
-Route::post('/admin/proizvodjaci/save', 'ManufacturersController@store');
-
-// Admin - Users
-Route::get('admin/korisnici', 'UsersController@index');
-Route::get('/admin/test', 'UsersController@test');
-Route::get('/admin/artikli', 'ItemsController@index');
+Route::get('/artikli', 'ItemsController@index');
+Route::post('/artikli/save', 'ItemsController@store');
+Route::get('/artikli/{item}/uredi', 'ItemsController@edit');
+Route::put('/artikli/{item}', 'ItemsController@update');
+Route::delete('/artikli/{item}', 'ItemsController@destroy');
+Route::post('/manufacturers/save', 'ManufacturersController@store');
+Route::get('/korisnici', 'UsersController@index');
