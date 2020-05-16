@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreItem;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Item;
@@ -24,7 +25,6 @@ class ItemsController extends Controller
     {
         $items = Item::all();
         $manufacturers = Manufacturer::all();
-
         return view('admin.items.index')->with(['items' => $items, 'manufacturers' => $manufacturers, 'filterMessage' => '']);
     }
 
@@ -43,12 +43,12 @@ class ItemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreItem $request)
+    public function store(Request $request)
     {
         // $title = iconv('UTF-8', 'ASCII//TRANSLIT', $request->title);
         $item = Item::where('title', $request->title)->get();
         if (!$item->isEmpty()) {
-            return redirect('/admin/artikli')->with('warning', 'Postoji artikl sa nazivom ' . $request->title . '.');
+            return redirect('/artikli')->with('warning', 'Postoji artikl sa nazivom ' . $request->title . '.');
         }
         $newItem = new Item();
         $newItem->title = $request->title;
@@ -57,7 +57,15 @@ class ItemsController extends Controller
         $newItem->body = $request->body;
         $newItem->releaseYear = $request->releaseYear;
         $newItem->save();
-        return redirect('/admin/artikli')->with('success', 'Artikl ' . "$request->title" . ' dodan.');
+
+        foreach ($request->file('image_upload') as $image) {
+            $image->storeAs('/public/images', $image->getClientOriginalName());
+            $itemImage = new Image();
+            $itemImage->item_id = $newItem->id;
+            $itemImage->title = $image->getClientOriginalName();
+            $itemImage->save();
+        };
+        return redirect('/artikli')->with('success', 'Artikl ' . "$request->title" . ' dodan.');
     }
 
     /**

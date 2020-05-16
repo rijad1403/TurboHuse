@@ -101,7 +101,15 @@ nav {
 
 .nav-link:hover, .active {
     border-bottom: 2px solid #FF9900;
-    color: black;
+    color: black !important;
+}
+
+.nav-link.active span{
+    background-color: black;
+}
+
+.nav-link:hover span{
+        background-color: black;
 }
 
 .main {
@@ -204,13 +212,10 @@ nav {
     background-color: #CC6600;
 }
 
-
-
-
 .content {
     margin: 0 0 20px;        
+    min-height: 426px;
 }
-
 
 .item {
     border-radius: 0;
@@ -221,7 +226,6 @@ nav {
     border: 1px solid #f4f4f4;
     transition: box-shadow, .2s;
     color: black;
-
 }
 
 .item:hover {
@@ -237,6 +241,12 @@ nav {
 
 
 // footer
+
+footer {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
 footer .row .col-md-4 {
     background-color: #333333;
     color: white;
@@ -298,3 +308,19 @@ footer .row .col-12 {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
   }
+
+
+  .yellowText {
+      color: #ff9900;
+  }
+
+  .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #ff9900;
+    border-color: #ff9900;
+}
+
+.pagination .page-link {
+    color: #212529;
+}

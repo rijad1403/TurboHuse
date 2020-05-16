@@ -13,8 +13,11 @@
 <body>
     @include('partials.header')
     @include('partials.navbar')
-    @if (Route::current()->uri !== 'prijava' && Route::current()->uri !== 'registracija' && Route::current()->uri !==
-    'kosara' && Route::current()->uri !== 'profil')
+    @if ((!Auth::user() && Route::current()->uri !== 'prijava' && Route::current()->uri !== 'registracija' &&
+    Route::current()->uri !== 'kosara')
+    || (Auth::user() && Auth::user()->type == 'user' && Route::current()->uri !=='kosara' && Route::current()->uri
+    !=='profil')
+    || (Auth::user() && Auth::user()->type == 'admin' && Route::current()->uri == '*'))
     @include('partials.hero')
     @endif
     @yield('content')

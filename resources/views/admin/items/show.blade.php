@@ -17,10 +17,12 @@
                         <img src=" {{asset('images/turbine.jpg')}} " style="width: 100%; border: 2px solid white;">
                     </div>
                     <div class="row">
-                        <img src=" {{asset('images/turbine.jpg')}} " style="width: 25%; border: 2px solid white;">
-                        <img src=" {{asset('images/turbine.jpg')}} " style="width: 25%; border: 2px solid white;">
-                        <img src=" {{asset('images/turbine.jpg')}} " style="width: 25%; border: 2px solid white;">
-                        <img src=" {{asset('images/turbine.jpg')}} " style="width: 25%; border: 2px solid white;">
+                        @forelse ($item->images as $image)
+                        <img src=" {{asset('storage/images/'.$image->title)}} "
+                            style="width: 25%; border: 2px solid white;">
+                        @empty
+
+                        @endforelse
                     </div>
                 </div>
                 <div class="col-md-6" style="padding: 20px 10px;">
@@ -32,8 +34,10 @@
                     </p>
                     <p style="text-align: justify;">Opis: {{ $item->body }}
                     </p>
+                    @if (!Auth::user() || Auth::user()->type == 'user')
                     <button class="btn btn-primary" onclick="addToCart({{ $item }})"><i class=" fas fa-cart-plus"></i>
                         Dodaj u košaru</button>
+                    @endif
                 </div>
             </div>
         </div>

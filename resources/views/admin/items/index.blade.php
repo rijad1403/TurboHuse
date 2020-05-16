@@ -37,16 +37,17 @@
                         placeholder="Maksimalna cijena, npr. 1000">
                 </div>
                 <div class="form-group">
-                    <label for="cijena"><i class="fas fa-calendar"></i> Godina proizvodnje</label>
+                    <label for="releaseYear"><i class="fas fa-calendar"></i> Godina proizvodnje</label>
                     <input type="text" name="releaseYear" id="releaseYear" class="form-control" placeholder="Npr. 2005">
                 </div>
+
                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Pretraga artikala</button>
             </form>
         </div>
 
         <div class="col-sm-12 col-md-12 col-lg-9">
             <div class="row">
-                <div class="col-12">
+                <div class="col-lg-4">
                     @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -87,10 +88,14 @@
                             <small class="text-muted">{{$item->manufacturer->title}}</small>
                             <h5 class="card-title">{{$item->title}}</h5>
                             <h5 class="card-title">{{$item->price}} KM</h5>
-                            <div> <button class="btn btn-primary" onclick="addToCart({{ $item }})"><i
-                                        class="fas fa-cart-plus"></i>
-                                    Dodaj u
-                                    košaru</button></div>
+
+                            @if (!Auth::user() || Auth::user()->type !== 'admin' )
+                            <div>
+                                <button class="btn btn-primary" onclick="addToCart({{ $item }})">
+                                    <i class="fas fa-cart-plus"></i> Dodaj u košaru
+                                </button>
+                            </div>
+                            @endif
                             <div>
                                 <a class="btn btn-primary" href="/artikli/{{$item->id}}" role="button"
                                     style="text-transform: initial; border-radius: 0;"><i
@@ -128,7 +133,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/admin/artikli/save" method="POST">
+            <form action="/artikli/save" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -160,6 +165,25 @@
                         <input type="number" name="releaseYear" id="releaseYear" class="form-control"
                             placeholder="Npr. 2005">
                     </div>
+                    <div class="form-group">
+                        <label for="imageUpload" class="imageUpload">
+                            <i class="fas fa-images"></i>
+                            Upload slike/slika artikla
+                            <input type="file" name="image_upload[]" id="imageUpload" multiple>
+                        </label>
+                    </div>
+                    <style>
+                        input[type="file"] {
+                            /* display: none; */
+                        }
+
+                        .imageUpload {
+                            border: 1px solid #ccc;
+                            display: inline-block;
+                            padding: 6px 12px;
+                            cursor: pointer;
+                        }
+                    </style>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"><i class="far fa-save"></i>
@@ -180,7 +204,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/admin/proizvodjaci/save" method="POST">
+            <form action="/proizvodjaci/save" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">

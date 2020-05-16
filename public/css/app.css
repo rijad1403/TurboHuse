@@ -10978,7 +10978,15 @@ nav {
 .nav-link:hover,
 .active {
   border-bottom: 2px solid #FF9900;
-  color: black;
+  color: black !important;
+}
+
+.nav-link.active span {
+  background-color: black;
+}
+
+.nav-link:hover span {
+  background-color: black;
 }
 
 .main {
@@ -11107,6 +11115,7 @@ nav {
 
 .content {
   margin: 0 0 20px;
+  min-height: 426px;
 }
 
 .item {
@@ -11130,6 +11139,12 @@ nav {
   height: 100%;
   -webkit-filter: grayscale(70%);
           filter: grayscale(70%);
+}
+
+footer {
+  width: 100%;
+  position: relative;
+  bottom: 0;
 }
 
 footer .row .col-md-4 {
@@ -11219,5 +11234,20 @@ footer .row .col-12 {
     bottom: 0;
     opacity: 0;
   }
+}
+
+.yellowText {
+  color: #ff9900;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #ff9900;
+  border-color: #ff9900;
+}
+
+.pagination .page-link {
+  color: #212529;
 }
 

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Address;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Registration;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -23,50 +25,35 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected function store(Request $request)
     {
-        $this->middleware('guest');
-    }
+        $user = User::where('email', $request->email)->get();
+        if ($user->isNotEmpty()) {
+            return redirect('/registracija')->with('warning', 'Postoji korisnik sa emailom ' . $request->email . '.');
+        } else {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->type = 'user';
+            $user->city = $request->city;
+            $user->state = $request->state;
+            $user->street = $request->street;
+            $user->phone = $request->phone;
+            $user->zip_code = $request->zip_code;
+            $user->save();
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+            $address = new Address();
+            $address->user_id = $user->id;
+            $address->name = $request->name;
+            $address->email = $request->email;
+            $address->city = $request->city;
+            $address->state = $request->state;
+            $address->street = $request->street;
+            $address->phone = $request->phone;
+            $address->zip_code = $request->zip_code;
+            $address->save();
+            return redirect('/registracija')->with('success', 'Korisnik ' . "$request->name" . ' uspješno registriran.');
+        }
     }
 }

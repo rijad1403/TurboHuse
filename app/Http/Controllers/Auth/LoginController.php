@@ -44,9 +44,10 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect('profil');
+            return redirect()->intended('profil');
         }
-        return view('login');
+        return redirect('prijava');
+
     }
 
     public function logout()

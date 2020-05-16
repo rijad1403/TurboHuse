@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-4">
                 <p class="text-white"><i class="fas fa-map-marker-alt"></i> Lufthavnsvej 25 9400 Nørresundby</p>
-                <p class="text-white"><i class="fas fa-phone-alt"></i> 0045 50908163</p>
+                <p class="text-white"><i class="fas fa-phone-square-alt"></i> 0045 50908163</p>
                 <p class="text-white"><i class="fas fa-envelope"></i> office@turbohuse.com</p>
             </div>
             <div class="col-md-4">
@@ -32,69 +32,131 @@
 
 
 <script>
-    let cartItems = [];
+    let cartItems; 
     let totalPrice = 0;
-    reloadCart();
+    let cartItemsContainer = document.querySelector('#cart');
+    
+    reloadCartTab();
+    reloadCartItemsContainer();
 
     function addToCart(item) {
-        const cartItem = {id: item.id, title: item.title, price: item.price, quantity: 1};
-        if(localStorage.getItem('cartItems')) {
-            cartItems = JSON.parse(localStorage.getItem('cartItems'));
-            const foundItem = cartItems.find(item => item.id === cartItem.id);
-            if (foundItem) {
-                foundItem.quantity++;
-            } else {
-                cartItems.push(cartItem);
-            }
+        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+        foundItem = cartItems.find(cartItem => cartItem.id == item.id);
+        if(foundItem) {
+            foundItem.quantity = foundItem.quantity + 1;
         } else {
-            cartItems.push(cartItem);
+            item.quantity = 1
+            cartItems.push(item);
         }
-    localStorage.setItem('cartItems',JSON.stringify(cartItems));
-    reloadCart();
-    var x = document.getElementById("snackbar");
-    x.innerHTML = `Artikl ${item.title} dodan u košaru.`
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-   }
-
-    function reloadCart() {
-        totalPrice = 0;
-        if(localStorage.getItem('cartItems')) {
-        cartItems = JSON.parse(localStorage.getItem('cartItems'));
-        cartItems.forEach(item => {
-            totalPrice = totalPrice + item.price * item.quantity;
-        });
-        document.querySelector('#totalPrice').textContent = `${totalPrice} KM`;
-        document.querySelector('#quantity').textContent = cartItems.length === 1 ? `${cartItems.length} artikl` : `${cartItems.length} artikla`;
-        } else {
-            document.querySelector('#totalPrice').textContent = ``;
-            document.querySelector('#quantity').textContent = ``;
-        }
+        toastMessage(item);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        reloadCartTab();
     }
 
-    const cartItemsContainer = document.querySelector('#cart');
-    if (cartItemsContainer) {
-        if(JSON.parse(localStorage.getItem('cartItems'))) {
-        cartItems = JSON.parse(localStorage.getItem('cartItems'));
-        } if (cartItems && cartItems.length > 0) {
+    function removeFromCart(itemId) {
+        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+        cartItems = cartItems.filter(cartItem => cartItem.id !== itemId);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));      
+        reloadCartTab();
+        reloadCartItemsContainer();
+   }
+
+
+   function itemPlusOne(itemId) {
+        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+        foundItem = cartItems.find(cartItem => cartItem.id == itemId);
+        foundItem.quantity ++;
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));       
+        reloadCartTab();
+        reloadCartItemsContainer();
+   }
+
+   function itemMinusOne(itemId) {
+        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+        foundItem = cartItems.find(cartItem => cartItem.id == itemId);
+        cartItems.forEach(cartItem => {
+            if(cartItem.id == itemId) {
+                cartItem.quantity --;
+                cartItems = cartItems.filter(cartItem => cartItem.quantity > 0);
+            }
+        });
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));       
+        reloadCartTab();
+        reloadCartItemsContainer();
+   }
+
+    function toastMessage(item) {
+        var x = document.getElementById("snackbar");
+        x.innerHTML = `Artikl ${item.title} dodan u košaru.`
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+
+    function reloadCartTab() {
+        totalPrice = 0;
+        const user = @json(Auth::user());
+        if(!user || (user && user.type !== 'admin')) {
+            cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+            if(cartItems.length > 0) {
+            cartItems = JSON.parse(localStorage.getItem('cartItems'));
             cartItems.forEach(item => {
-            const element = document.createElement('div');
-            element.innerHTML = `<div>Naziv: ${item.title}</div><div>Cijena: ${item.price} KM</div><div>Količina: ${item.quantity}</div>`;
-            element.style.borderBottom = '1px solid lightgray';
-            element.classList.add('p-2')
-            cartItemsContainer.appendChild(element);
+                totalPrice = totalPrice + item.price * item.quantity;
             });
-            const element = document.createElement('div');
-            element.innerHTML = `<div>Ukupna cijena: ${totalPrice} KM</div>`;
-            element.style.borderBottom = '1px solid lightgray';
-            element.style.textAlign = 'right';
-            element.style.fontWeight = 'bold';
-            element.classList.add('p-2')
-            cartItemsContainer.appendChild(element);
-        } else {
-            const element = document.createElement('div');
-            element.textContent = 'Vaša košara je prazna.'
-            cartItemsContainer.appendChild(element);
+            document.querySelector('#totalPrice').textContent = `${totalPrice} KM`;
+            document.querySelector('#quantity').textContent = cartItems.length === 1 ? `${cartItems.length} artikl` : `${cartItems.length} artikla`;
+            } else {
+                document.querySelector('#totalPrice').textContent = ``;
+                document.querySelector('#quantity').textContent = ``;
+            }
+        }
+       
+    }
+
+    function reloadCartItemsContainer() {
+        if (cartItemsContainer) {
+            cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
+            cartTable = cartItemsContainer.querySelector('tbody');
+            cartTable.innerHTML = null; 
+            document.querySelector('input#totalPrice').value = totalPrice;
+            if (cartItems && cartItems.length > 0) {
+                document.querySelector('#cartItems').value = JSON.stringify(cartItems);
+                cartItems.forEach(item => {
+                const tableRow = document.createElement('tr');
+                tableRow.innerHTML = `
+                                        <td><img style="width: 100px; height: auto;"
+                                                                    src="{{asset('images/items/test.jpg')}}" alt=""></td>
+                                        <td><a href="/artikli/${item.id}">${item.title}</a> </td>
+                                        <td>${item.price} KM</td>
+                                        <td>${item.quantity}</td>
+                                        <td>
+                                            <button title="Povećaj kvantitet" onclick="itemPlusOne(${item.id})"><i class="fas fa-plus-circle"></i></button>
+                                            <button title="Smanji kvantitet" onclick="itemMinusOne(${item.id})"><i class="fas fa-minus-circle"></i></button>
+                                            <button title="Ukloni iz košare" onclick="removeFromCart(${item.id})"><i class="fas fa-times-circle"></i></button>
+                                        </td>
+                                    `;
+                cartTable.appendChild(tableRow);
+                });
+                const totalPriceRow = document.createElement('tr');
+                totalPriceRow.innerHTML = `<td colspan="5">Ukupna cijena: ${totalPrice} KM</td>`;
+                totalPriceRow.style.textAlign = 'right';
+                totalPriceRow.style.fontWeight = 'bold';
+                cartTable.appendChild(totalPriceRow);
+            } else {
+                document.querySelector('table').remove();
+                const element = document.createElement('div');
+                element.classList.add('row');
+                element.classList.add('justify-content-center');
+                element.style.textAlign = 'center';
+                element.textContent = 'Vaša košara je prazna.'
+                const element2 = document.createElement('div');
+                element2.classList.add('row');
+                element2.classList.add('justify-content-center');
+                element2.innerHTML = '<a href="/artikli" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Započni s kupovinom</a href="/artikli">'
+                cartItemsContainer.appendChild(element);
+                cartItemsContainer.appendChild(element2);
+
+            }
         }
     }
 
@@ -103,8 +165,10 @@
 	    document.querySelector('#email').value = user.email;
 	    document.querySelector('#city').value = user.city;
 	    document.querySelector('#state').value = user.state;
-	    document.querySelector('#address').value = user.address;
+	    document.querySelector('#street').value = user.street;
 	    document.querySelector('#phone').value = user.phone;
+	    document.querySelector('#zipCode').value = user.zip_code;
+
 	    const types = document.querySelectorAll('option');
 	    types.forEach(type => {
 	        if (type.value == user.type) {
@@ -112,7 +176,6 @@
 	        }
 	    });
 	}
-
 
     const navbarLinks = document.querySelectorAll('.nav-link')
     navbarLinks.forEach(navLink => {

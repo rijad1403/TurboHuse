@@ -20,12 +20,12 @@ class ManufacturersController extends Controller
     {
         $manufacturer = Manufacturer::where('title', $request->title)->get();
         if (!$manufacturer->isEmpty()) {
-            return redirect('/admin/artikli')->with('warning', 'Postoji proizvođač sa nazivom ' . $request->title . '.');
+            return redirect('/artikli')->with('warning', 'Postoji proizvođač sa nazivom ' . $request->title . '.');
         } else {
             $newManufacturer = new Manufacturer();
             $newManufacturer->title = $request->title;
             $newManufacturer->save();
-            return redirect('/admin/artikli');
+            return redirect('/artikli')->with('success', 'Proizvođač ' . $request->title . ' dodan.');
         }
     }
 }
