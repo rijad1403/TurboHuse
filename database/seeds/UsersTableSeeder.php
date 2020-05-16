@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         $user->name = 'Rijad Gračanin';
         $user->email = 'user@gmail.com';
         $user->password = Hash::make('12345');
-        $user->type = 'admin';
+        $user->type = 'user';
         $user->city = 'Aalborg';
         $user->state = 'Danska';
         $user->street = 'Aalborg 12345';
