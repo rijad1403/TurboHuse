@@ -41,9 +41,16 @@ Route::post('/artikli/save', 'ItemsController@store')->middleware('admin');
 Route::get('/artikli/{item}/uredi', 'ItemsController@edit')->middleware('admin');
 Route::put('/artikli/{item}', 'ItemsController@update')->middleware('admin');
 Route::delete('/artikli/{item}', 'ItemsController@destroy')->middleware('admin');
+
+Route::get('/proizvodjaci', 'ManufacturersController@index')->middleware('admin');
 Route::post('/proizvodjaci/save', 'ManufacturersController@store')->middleware('admin');
+Route::put('/proizvodjaci/{manufacturer}', 'ManufacturersController@update')->middleware('admin');
+Route::delete('/proizvodjaci/{manufacturer}', 'ManufacturersController@destroy')->middleware('admin');
+
+
 Route::get('/korisnici', 'UsersController@index')->middleware('admin');
 Route::put('/korisnici/{user}', 'UsersController@updateUser')->middleware('admin');
-Route::get('/kupovine', 'CartsController@index')->middleware('admin');
 Route::post('/korisnici/store', 'UsersController@store')->middleware('admin');
 Route::get('/korisnici/{user}', 'UsersController@show')->middleware('admin');
+
+Route::get('/kupovine', 'CartsController@index')->middleware('admin');
