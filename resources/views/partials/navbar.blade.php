@@ -4,8 +4,8 @@
         <li class="nav-item"> <a href="/" class="nav-link">početna</a></li>
         <li class="nav-item"> <a href="/artikli" class="nav-link">artikli</a></li>
         @if (Auth::user() && Auth::user()->type == 'admin')
-        <li class="nav-item"> <a href="/korisnici" class="nav-link">korisnici</a></li>
         <li class="nav-item"> <a href="/proizvodjaci" class="nav-link">proizvođači</a></li>
+        <li class="nav-item"> <a href="/korisnici" class="nav-link">korisnici</a></li>
         @endif
         <li class="nav-item"> <a href="/onama" class="nav-link">o nama</a></li>
         <li class="nav-item"> <a href="/kontakt" class="nav-link">kontakt</a></li>

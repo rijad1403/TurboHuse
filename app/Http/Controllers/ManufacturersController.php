@@ -22,7 +22,7 @@ class ManufacturersController extends Controller
     {
         $manufacturer = Manufacturer::where('title', $request->title)->get();
         if ($manufacturer->isNotEmpty()) {
-            return redirect('/artikli')->with('warning', 'Postoji proizvođač sa nazivom ' . $request->title . '.');
+            return back()->with('warning', 'Postoji proizvođač sa nazivom ' . $request->title . '.');
         } else {
             $newManufacturer = new Manufacturer();
             $newManufacturer->title = $request->title;
