@@ -25,7 +25,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    protected function store(Request $request)
+    protected function store(Registration $request)
     {
         $user = User::where('email', $request->email)->get();
         if ($user->isNotEmpty()) {

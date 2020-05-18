@@ -41,6 +41,7 @@ class Registration extends FormRequest
         return [
             'name.required' => 'Polje sa imenom je obavezno.',
             'email.required' => 'Polje sa emailom je obavezno.',
+            'email.email' => 'Polje sa emailom mora biti u formatu email adrese. Npr. user@service.com.',
             'password.required' => 'Polje sa lozinkom je obavezno.',
             'city.required' => 'Polje sa gradom je obavezno.',
             'state.required' => 'Polje sa državom je obavezno.',
