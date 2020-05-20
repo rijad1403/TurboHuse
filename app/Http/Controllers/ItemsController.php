@@ -59,7 +59,7 @@ class ItemsController extends Controller
         $newItem->save();
 
         foreach ($request->file('image_upload') as $image) {
-            $image->storeAs('/public/images', $image->getClientOriginalName());
+            $image->storeAs('/public/uploads', $image->getClientOriginalName());
             $itemImage = new Image();
             $itemImage->item_id = $newItem->id;
             $itemImage->title = $image->getClientOriginalName();

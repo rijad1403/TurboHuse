@@ -106,7 +106,11 @@
                             <div>
                                 <a class="btn btn-primary" href="/artikli/{{$item->id}}/uredi" role="button"
                                     style="text-transform: initial; border-radius: 0;"><i class="fas fa-edit"></i>
-                                    Uredi artikl</a>
+                                    Uredi artikl</a> <br>
+                                <button class="btn btn-primary" data-toggle="modal"
+                                    data-target="#deleteItemModal{{ $item->id }}" title="Ukloni artikl"><i
+                                        class="far fa-trash-alt"></i> Ukloni artikl
+                                </button>
                             </div>
                             @endif
                         </div>

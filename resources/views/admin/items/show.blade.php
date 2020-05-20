@@ -18,7 +18,7 @@
                     </div>
                     <div class="row">
                         @forelse ($item->images as $image)
-                        <img src=" {{asset('storage/images/'.$image->title)}} "
+                        <img src=" {{asset('storage/uploads/'.$image->title)}} "
                             style="width: 25%; border: 2px solid white;">
                         @empty
 
