@@ -71,12 +71,13 @@ class ItemsController extends Controller
     public function upload(Request $request)
     {
         $images = $request->file('images');
+        $paths = collect();
+
         foreach ($images as $image) {
             $image->storeAs('/public/uploads', $image->getClientOriginalName());
+            $paths->push($image->storeAs('/public/uploads', $image->getClientOriginalName()));
         }
-
-
-        return response(Item::all());
+        return response($paths);
     }
 
     /**
