@@ -68,6 +68,17 @@ class ItemsController extends Controller
         return redirect('/artikli')->with('success', 'Artikl ' . "$request->title" . ' dodan.');
     }
 
+    public function upload(Request $request)
+    {
+        $images = $request->file('images');
+        foreach ($images as $image) {
+            $image->storeAs('/public/uploads', $image->getClientOriginalName());
+        }
+
+
+        return response(Item::all());
+    }
+
     /**
      * Display the specified resource.
      *
