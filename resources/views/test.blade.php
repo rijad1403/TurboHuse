@@ -67,7 +67,8 @@
                 $('.loader').css('display',' block');
                 event.preventDefault();
                 $.ajax({
-                    url: 'http://127.0.0.1:8000/upload',
+                    // url: 'http://127.0.0.1:8000/upload',
+                    url: 'https://shielded-gorge-54004.herokuapp.com/testPage',
                     method: 'POST',
                     data: new FormData($('#form')[0]),
                     dataType: 'JSON',
