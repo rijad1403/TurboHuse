@@ -206,8 +206,8 @@
                         $('.loader').css('display',' block');
                         $('.loaderText').css('display',' block');
                         $.ajax({
-                            url: 'http://127.0.0.1:8000/artikli/save',
-                            // url: 'https://shielded-gorge-54004.herokuapp.com/upload',
+                            // url: 'http://127.0.0.1:8000/artikli/save',
+                            url: 'https://shielded-gorge-54004.herokuapp.com/artikli/save',
                             method: 'POST',
                             data: new FormData($('#newItemForm')[0]),
                             dataType: 'JSON',
