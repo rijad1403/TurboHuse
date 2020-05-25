@@ -74,7 +74,7 @@ class ItemsController extends Controller
     public function upload(Request $request)
     {
         $images = $request->file('images')->getRealPath();
-        Cloudder::upload($images, null);
+        // Cloudder::upload($images, null);
         // foreach ($images as $image) {
         //     $imagePath = $image->getRealPath();
         //     // Cloudder::upload($imagePath, null);
