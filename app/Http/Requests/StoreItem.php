@@ -28,7 +28,8 @@ class StoreItem extends FormRequest
             'price' => 'required|numeric',
             'car' => 'required',
             'body' => 'required',
-            'releaseYear' => 'required|numeric|between:1901,2155'
+            'releaseYear' => 'required|numeric|between:1901,2155',
+            'image_upload' => 'required'
         ];
     }
 
@@ -42,7 +43,9 @@ class StoreItem extends FormRequest
             'releaseYear.numeric' => 'Za polje sa godinom proizvodnje unešena vrijednost mora biti cijeli broj. Npr. 2004.',
             'releaseYear.between' => 'Za godinu proizvodnje unešena vrijednost ne smije biti manja od 1901 i veća od 2155.',
             'price.required' => 'Polje sa cijenom artikla je obavezno.',
-            'price.numeric' => 'Za polje sa cijenom artikla unešena vrijednost mora biti cijeli broj. Npr. 400.'
+            'price.numeric' => 'Za polje sa cijenom artikla unešena vrijednost mora biti cijeli broj. Npr. 400.',
+            'image_upload.required' => 'Upload slike je obavezan.',
+
 
         ];
     }

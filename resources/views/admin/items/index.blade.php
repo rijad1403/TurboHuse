@@ -137,7 +137,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" id="newItemForm" enctype="multipart/form-data">
+            <form method="POST" action="/artikli/save" id="newItemForm" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -195,35 +195,47 @@
                     </style>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"><i class="far fa-save"></i>
+                    <button type="submit" class="btn btn-primary" id="saveItemButton"><i class="far fa-save"></i>
                         Spremi</button>
                 </div>
             </form>
             <script>
+                // $(document).ready(() => {
+                //     $('#newItemForm').on('submit', (event) => {
+                //         event.preventDefault();
+                //         $('.loader').css('display',' block');
+                //         $('.loaderText').css('display',' block');
+                //         $.ajax({
+                //             url: 'http://127.0.0.1:8000/artikli/save',
+                //             // url: 'http://shielded-gorge-54004.herokuapp.com/artikli/save',
+                //             method: 'POST',
+                //             data: new FormData($('#newItemForm')[0]),
+                //             dataType: 'JSON',
+                //             contentType: false,
+                //             cache:false,
+                //             processData: false,
+                //             success: (data) => {
+                //                 $('.loader').css('display',' none');
+                //                 $('.loaderText').css('display',' none');
+                //                 setTimeout(() => {
+                //                     location.reload();
+                //                 }, 500);
+                //             },
+                //             error: (xhr, options, error) => {
+                //                 console.log(xhr);
+                //                 console.log(error);
+                //             }
+                //         });
+                //     });
+                // });
+
                 $(document).ready(() => {
-                    $('#newItemForm').on('submit', (event) => {
-                        event.preventDefault();
-                        $('.loader').css('display',' block');
-                        $('.loaderText').css('display',' block');
-                        $.ajax({
-                            // url: 'http://127.0.0.1:8000/artikli/save',
-                            url: 'http://shielded-gorge-54004.herokuapp.com/artikli/save',
-                            method: 'POST',
-                            data: new FormData($('#newItemForm')[0]),
-                            dataType: 'JSON',
-                            contentType: false,
-                            cache:false,
-                            processData: false,
-                            success: (data) => {
-                                $('.loader').css('display',' none');
-                                $('.loaderText').css('display',' none');
-                                setTimeout(() => {
-                                    location.reload();
-                                }, 500);
-                            }
-                        })
+                    $('#saveItemButton').on('click', () => {
+                        $('.loaderText').css('display', 'block');
+                        $('.loader').css('display', 'block');
                     })
-                });
+
+                })
             </script>
         </div>
     </div>

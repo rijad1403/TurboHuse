@@ -45,7 +45,7 @@ class ItemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreItem $request)
     {
         // $title = iconv('UTF-8', 'ASCII//TRANSLIT', $request->title);
         $item = Item::where('title', $request->title)->get();
@@ -72,7 +72,7 @@ class ItemsController extends Controller
             $itemImage->save();
         };
 
-        return response($imageUrls);
+        // return response()->json(['message' => 'upload']);
 
         return redirect('/artikli')->with('success', 'Artikl ' . "$request->title" . ' dodan.');
     }
