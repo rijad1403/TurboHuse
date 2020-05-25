@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Item;
 use App\Manufacturer;
+use Cloudinary\Cloudinary;
+use JD\Cloudder\Facades\Cloudder;
+
 
 use function PHPSTORM_META\type;
 
@@ -24,7 +27,7 @@ class ItemsController extends Controller
     public function index()
     {
         $items = Item::all();
-        $manufacturers = Manufacturer::all();
+        $manufacturers = Manufacturer::orderBy('title', 'asc')->get();
         return view('admin.items.index')->with(['items' => $items, 'manufacturers' => $manufacturers, 'filterMessage' => '']);
     }
 
@@ -70,14 +73,14 @@ class ItemsController extends Controller
 
     public function upload(Request $request)
     {
-        $images = $request->file('images');
-        $paths = collect();
-
-        foreach ($images as $image) {
-            $image->storeAs('/public/uploads', $image->getClientOriginalName());
-            $paths->push($image->storeAs('/public/uploads', $image->getClientOriginalName()));
-        }
-        return response($paths);
+        $images = $request->file('images')->getRealPath();
+        Cloudder::upload($images, null);
+        // foreach ($images as $image) {
+        //     $imagePath = $image->getRealPath();
+        //     // Cloudder::upload($imagePath, null);
+        //     $uploads->push($imagePath);
+        // }
+        return response($images);
     }
 
     /**

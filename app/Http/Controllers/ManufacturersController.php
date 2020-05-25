@@ -10,7 +10,7 @@ class ManufacturersController extends Controller
 {
     public function index()
     {
-        $manufacturers = Manufacturer::all();
+        $manufacturers = Manufacturer::orderBy('title', 'asc')->get();
         return view('admin.manufacturers.index', ['manufacturers' => $manufacturers]);
     }
 

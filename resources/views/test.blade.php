@@ -50,7 +50,7 @@
 
     <form id="form" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="file" name="images[]" multiple id="">
+        <input type="file" name="images" id="">
         <button type="submit">Spremi</button>
         <div></div>
     </form>
@@ -67,8 +67,8 @@
                 $('.loader').css('display',' block');
                 event.preventDefault();
                 $.ajax({
-                    // url: 'http://127.0.0.1:8000/upload',
-                    url: 'https://shielded-gorge-54004.herokuapp.com/upload',
+                    url: 'http://127.0.0.1:8000/upload',
+                    // url: 'https://shielded-gorge-54004.herokuapp.com/upload',
                     method: 'POST',
                     data: new FormData($('#form')[0]),
                     dataType: 'JSON',
