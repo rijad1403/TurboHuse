@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Item;
 use App\Manufacturer;
-use Cloudinary\Cloudinary;
 use JD\Cloudder\Facades\Cloudder;
 
 
@@ -73,14 +72,14 @@ class ItemsController extends Controller
 
     public function upload(Request $request)
     {
-        $images = $request->file('images')->getRealPath();
-        // Cloudder::upload($images, null);
-        // foreach ($images as $image) {
-        //     $imagePath = $image->getRealPath();
-        //     // Cloudder::upload($imagePath, null);
-        //     $uploads->push($imagePath);
-        // }
-        return response($images);
+        $images = $request->file('images');
+        $imageUrls = collect();
+        foreach ($images as $image) {
+            $imagePath = $image->getRealPath();
+            Cloudder::upload($imagePath, null);
+            $imageUrls->push(Cloudder::getResult()['url']);
+        }
+        return response($imageUrls);
     }
 
     /**

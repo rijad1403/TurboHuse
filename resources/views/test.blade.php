@@ -50,7 +50,7 @@
 
     <form id="form" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="file" name="images" id="">
+        <input type="file" name="images[]" id="">
         <button type="submit">Spremi</button>
         <div></div>
     </form>
