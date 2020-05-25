@@ -83,7 +83,7 @@
                 @forelse ($items as $item)
                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                     <div class="card item" style="width: 80%;">
-                        <img class="card-img-top" src=" {{asset('images/items/test.jpg')}} " alt="Card image cap">
+                        <img class="card-img-top" src=" {{ $item->images[0]->title }} " alt="Card image cap">
                         <div class="card-body">
                             <small class="text-muted">{{$item->manufacturer->title}}</small>
                             <h5 class="card-title">{{$item->title}}</h5>
@@ -137,7 +137,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/artikli/save" method="POST" enctype="multipart/form-data">
+            <form method="POST" id="newItemForm" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -175,6 +175,11 @@
                             Upload slike/slika artikla
                             <input type="file" name="image_upload[]" id="imageUpload" multiple>
                         </label>
+                        <div class="loaderText" style="text-align: center; display: none;">
+                            Slika/slike se uploadaju, pričekajte trenutak...
+                        </div>
+                        <div class="loader" style="display: block; margin: auto; display: none;"></div>
+
                     </div>
                     <style>
                         input[type="file"] {
@@ -194,6 +199,32 @@
                         Spremi</button>
                 </div>
             </form>
+            <script>
+                $(document).ready(() => {
+                    $('#newItemForm').on('submit', (event) => {
+                        event.preventDefault();
+                        $('.loader').css('display',' block');
+                        $('.loaderText').css('display',' block');
+                        $.ajax({
+                            url: 'http://127.0.0.1:8000/artikli/save',
+                            // url: 'https://shielded-gorge-54004.herokuapp.com/upload',
+                            method: 'POST',
+                            data: new FormData($('#newItemForm')[0]),
+                            dataType: 'JSON',
+                            contentType: false,
+                            cache:false,
+                            processData: false,
+                            success: (data) => {
+                                $('.loader').css('display',' none');
+                                $('.loaderText').css('display',' none');
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 500);
+                            }
+                        })
+                    })
+                });
+            </script>
         </div>
     </div>
 </div>

@@ -30,17 +30,17 @@
     </div>
 </footer>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    let cartItems; 
+    let cartItems;
     let totalPrice = 0;
     let cartItemsContainer = document.querySelector('#cart');
-    
+
     reloadCartTab();
     reloadCartItemsContainer();
 
     function addToCart(item) {
-        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
         foundItem = cartItems.find(cartItem => cartItem.id == item.id);
         if(foundItem) {
             foundItem.quantity = foundItem.quantity + 1;
@@ -54,25 +54,25 @@
     }
 
     function removeFromCart(itemId) {
-        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
         cartItems = cartItems.filter(cartItem => cartItem.id !== itemId);
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));      
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
         reloadCartTab();
         reloadCartItemsContainer();
    }
 
 
    function itemPlusOne(itemId) {
-        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
         foundItem = cartItems.find(cartItem => cartItem.id == itemId);
         foundItem.quantity ++;
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));       
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
         reloadCartTab();
         reloadCartItemsContainer();
    }
 
    function itemMinusOne(itemId) {
-        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+        cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
         foundItem = cartItems.find(cartItem => cartItem.id == itemId);
         cartItems.forEach(cartItem => {
             if(cartItem.id == itemId) {
@@ -80,7 +80,7 @@
                 cartItems = cartItems.filter(cartItem => cartItem.quantity > 0);
             }
         });
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));       
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
         reloadCartTab();
         reloadCartItemsContainer();
    }
@@ -97,7 +97,7 @@
         totalPrice = 0;
         const user = @json(Auth::user());
         if(!user || (user && user.type !== 'admin')) {
-            cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []; 
+            cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
             if(cartItems.length > 0) {
             cartItems = JSON.parse(localStorage.getItem('cartItems'));
             cartItems.forEach(item => {
@@ -110,14 +110,14 @@
                 document.querySelector('#quantity').textContent = ``;
             }
         }
-       
+
     }
 
     function reloadCartItemsContainer() {
         if (cartItemsContainer) {
             cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
             cartTable = cartItemsContainer.querySelector('tbody');
-            cartTable.innerHTML = null; 
+            cartTable.innerHTML = null;
             document.querySelector('input#totalPrice').value = totalPrice;
             if (cartItems && cartItems.length > 0) {
                 document.querySelector('#cartItems').value = JSON.stringify(cartItems);
@@ -183,8 +183,8 @@
             navLink.classList.add('active');
         } else {
             navLink.classList.remove('active');
-        } 
+        }
     });
-    
+
 
 </script>

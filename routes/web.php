@@ -54,6 +54,3 @@ Route::post('/korisnici/store', 'UsersController@store')->middleware('admin');
 Route::get('/korisnici/{user}', 'UsersController@show')->middleware('admin');
 
 Route::get('/kupovine', 'CartsController@index')->middleware('admin');
-
-Route::view('/testPage', 'test');
-Route::post('/upload', 'ItemsController@upload');

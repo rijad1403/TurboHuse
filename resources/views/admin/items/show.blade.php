@@ -14,12 +14,13 @@
             <div class="row" style="background: white; box-shadow: 1px 1px 20px 1px lightgray; margin-bottom: 20px;">
                 <div class="col-md-6" style="padding: 0;">
                     <div class="row">
-                        <img src=" {{asset('images/turbine.jpg')}} " style="width: 100%; border: 2px solid white;">
+                        <img src=" {{ $item->images[0]->title }} " style="width: 100%; border: 2px solid white; box-shadow: 4px 4px 4px 1px lightgrey;
+                        ">
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: 10px">
                         @forelse ($item->images as $image)
-                        <img src=" {{asset('storage/uploads/'.$image->title)}} "
-                            style="width: 25%; border: 2px solid white;">
+                        <img src=" {{ $image->title }} " style="width: 25%; border: 2px solid white; box-shadow: 4px 4px 4px 1px lightgrey;
+                        ">
                         @empty
 
                         @endforelse

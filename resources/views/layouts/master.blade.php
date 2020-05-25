@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
     <link rel="stylesheet" href=" {{secure_asset('./css/app.css')}} ">
     <link rel="stylesheet" href=" {{asset('./css/app.css')}} ">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>TurboHuse</title>
 </head>
 

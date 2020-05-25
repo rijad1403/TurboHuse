@@ -10881,7 +10881,7 @@ a.text-dark:focus {
 }
 
 body {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -10896,13 +10896,13 @@ textarea {
 button {
   padding: 6px 10px;
   color: white;
-  background: #FF9900;
+  background: #ff9900;
   border-radius: 0;
   border: none;
 }
 
 button:hover {
-  background: #CC6600;
+  background: #cc6600;
 }
 
 h2 {
@@ -10912,7 +10912,7 @@ h2 {
 
 hr {
   margin: 0 auto 40px;
-  background: #FF9900;
+  background: #ff9900;
   width: 100px;
   height: 2px;
 }
@@ -10942,12 +10942,12 @@ p {
 }
 
 .logo {
-  background-color: #FF9900;
+  background-color: #ff9900;
 }
 
 .search {
-  background-image: linear-gradient(#FF9900, #ffcc80);
-  background: #FF9900;
+  background-image: linear-gradient(#ff9900, #ffcc80);
+  background: #ff9900;
 }
 
 .search-form {
@@ -10962,7 +10962,7 @@ p {
 }
 
 nav {
-  background-color: #F0F0F1;
+  background-color: #f0f0f1;
   text-transform: uppercase;
 }
 
@@ -10977,7 +10977,7 @@ nav {
 
 .nav-link:hover,
 .active {
-  border-bottom: 2px solid #FF9900;
+  border-bottom: 2px solid #ff9900;
   color: black !important;
 }
 
@@ -10996,7 +10996,7 @@ nav {
 
 .hero {
   position: relative;
-  border-bottom: 10px solid #FF9900;
+  border-bottom: 10px solid #ff9900;
 }
 
 .hero img {
@@ -11100,7 +11100,7 @@ nav {
 }
 
 .btn-primary {
-  background-color: #FF9900;
+  background-color: #ff9900;
   border: none;
   margin: 5px 5px 0 0;
 }
@@ -11110,7 +11110,7 @@ nav {
 }
 
 .btn-primary:hover {
-  background-color: #CC6600;
+  background-color: #cc6600;
 }
 
 .content {
@@ -11249,5 +11249,37 @@ footer .row .col-12 {
 
 .pagination .page-link {
   color: #212529;
+}
+
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #ff9900;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 

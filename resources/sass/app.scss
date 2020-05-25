@@ -1,33 +1,36 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-
+@import "~bootstrap/scss/bootstrap";
+@import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
 // Global
 body {
-    background-color: #FAFAFA;
-    font-family: 'Montserrat', sans-serif;
+    background-color: #fafafa;
+    font-family: "Montserrat", sans-serif;
     // color: #595959;
 }
 
-input, button, select, option, textarea {
+input,
+button,
+select,
+option,
+textarea {
     border-radius: 0 !important;
 }
 
 button {
     padding: 6px 10px;
     color: white;
-    background: #FF9900;
+    background: #ff9900;
     border-radius: 0;
     border: none;
 }
 
 button:hover {
-    background: #CC6600;
+    background: #cc6600;
 }
 
 h2 {
@@ -37,17 +40,17 @@ h2 {
 
 hr {
     margin: 0 auto 40px;
-    background: #FF9900;
+    background: #ff9900;
     width: 100px;
     height: 2px;
-
 }
 
 p {
     color: #404040;
 }
 
-.container-fluid, .row{
+.container-fluid,
+.row {
     margin: 0;
     padding: 0;
 }
@@ -57,7 +60,6 @@ p {
     background-color: #333333;
     color: white;
     padding: 10px;
-    
 }
 
 .align-right {
@@ -65,12 +67,12 @@ p {
 }
 
 .logo {
-    background-color: #FF9900;
+    background-color: #ff9900;
 }
 
 .search {
-    background-image: linear-gradient( #FF9900, #ffcc80);
-    background: #FF9900;
+    background-image: linear-gradient(#ff9900, #ffcc80);
+    background: #ff9900;
 }
 
 .search-form {
@@ -86,7 +88,7 @@ p {
 
 // Navbar
 nav {
-    background-color: #F0F0F1;
+    background-color: #f0f0f1;
     text-transform: uppercase;
 }
 
@@ -99,30 +101,29 @@ nav {
     color: #595959;
 }
 
-.nav-link:hover, .active {
-    border-bottom: 2px solid #FF9900;
+.nav-link:hover,
+.active {
+    border-bottom: 2px solid #ff9900;
     color: black !important;
 }
 
-.nav-link.active span{
+.nav-link.active span {
     background-color: black;
 }
 
-.nav-link:hover span{
-        background-color: black;
+.nav-link:hover span {
+    background-color: black;
 }
 
 .main {
     padding: 20px 0;
     margin: 20px auto;
-
 }
 
-
-// Hero 
+// Hero
 .hero {
     position: relative;
-    border-bottom: 10px solid #FF9900;
+    border-bottom: 10px solid #ff9900;
 }
 
 .hero img {
@@ -132,7 +133,6 @@ nav {
 
 .hero-image {
     position: relative;
-
 }
 
 .dark-color {
@@ -143,7 +143,7 @@ nav {
     top: 0;
     left: 0;
     z-index: 1;
-    opacity: .5;
+    opacity: 0.5;
 }
 
 .hero-text {
@@ -172,15 +172,14 @@ nav {
     animation-duration: 2s;
     animation-timing-function: ease-in-out;
     overflow: hidden;
-
 }
 
 @keyframes moving-h1 {
-   from {
-       left: -50%;
-       overflow: hidden;
-   }
-   to {
+    from {
+        left: -50%;
+        overflow: hidden;
+    }
+    to {
         left: 0;
         overflow: hidden;
     }
@@ -193,14 +192,12 @@ nav {
     }
     to {
         left: 0;
-     }
- }
-
-
+    }
+}
 
 // Buttons
 .btn-primary {
-    background-color: #FF9900;
+    background-color: #ff9900;
     border: none;
     margin: 5px 5px 0 0;
 }
@@ -209,11 +206,11 @@ nav {
     background: black;
 }
 .btn-primary:hover {
-    background-color: #CC6600;
+    background-color: #cc6600;
 }
 
 .content {
-    margin: 0 0 20px;        
+    margin: 0 0 20px;
     min-height: 426px;
 }
 
@@ -224,7 +221,7 @@ nav {
     text-align: center;
     text-transform: uppercase;
     border: 1px solid #f4f4f4;
-    transition: box-shadow, .2s;
+    transition: box-shadow, 0.2s;
     color: black;
 }
 
@@ -238,7 +235,6 @@ nav {
     height: 100%;
     filter: grayscale(70%);
 }
-
 
 // footer
 
@@ -281,40 +277,63 @@ footer .row .col-12 {
     left: 50%;
     bottom: 30px;
     font-size: 17px;
-  }
-  
-  #snackbar.show {
+}
+
+#snackbar.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  }
-  
-  @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
-  }
-  
-  @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-  }
-  
-  @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
-  }
-  
-  @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
-  }
+}
 
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
 
-  .yellowText {
-      color: #ff9900;
-  }
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
 
-  .page-item.active .page-link {
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+.yellowText {
+    color: #ff9900;
+}
+
+.page-item.active .page-link {
     z-index: 3;
     color: #fff;
     background-color: #ff9900;
@@ -323,4 +342,35 @@ footer .row .col-12 {
 
 .pagination .page-link {
     color: #212529;
+}
+
+.loader {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid #ff9900;
+    width: 20px;
+    height: 20px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

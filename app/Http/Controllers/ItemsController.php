@@ -25,7 +25,7 @@ class ItemsController extends Controller
 
     public function index()
     {
-        $items = Item::all();
+        $items = Item::latest()->get();
         $manufacturers = Manufacturer::orderBy('title', 'asc')->get();
         return view('admin.items.index')->with(['items' => $items, 'manufacturers' => $manufacturers, 'filterMessage' => '']);
     }
@@ -60,13 +60,20 @@ class ItemsController extends Controller
         $newItem->releaseYear = $request->releaseYear;
         $newItem->save();
 
+        $imageUrls = collect();
+
         foreach ($request->file('image_upload') as $image) {
-            $image->storeAs('/public/uploads', $image->getClientOriginalName());
+            $imagePath = $image->getRealPath();
+            Cloudder::upload($imagePath, null);
+            $imageUrls->push(Cloudder::getResult()['url']);
             $itemImage = new Image();
             $itemImage->item_id = $newItem->id;
-            $itemImage->title = $image->getClientOriginalName();
+            $itemImage->title = Cloudder::getResult()['url'];
             $itemImage->save();
         };
+
+        return response($imageUrls);
+
         return redirect('/artikli')->with('success', 'Artikl ' . "$request->title" . ' dodan.');
     }
 
