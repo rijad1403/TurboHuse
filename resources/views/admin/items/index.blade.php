@@ -83,7 +83,7 @@
             @forelse ($items as $item)
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <div class="card item" style="width: 80%;">
-                    <img class="card-img-top" src=" {{ $item->images[0]->title }} " alt="Card image cap">
+                    <img class="card-img-top" src=" {{ $item->images->first()->title }} " alt="Card image cap">
                     <div class="card-body">
                         <small class="text-muted">{{$item->manufacturer->title}}</small>
                         <h5 class="card-title">{{$item->title}}</h5>
