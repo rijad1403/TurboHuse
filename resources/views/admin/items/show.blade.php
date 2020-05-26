@@ -14,8 +14,13 @@
             <div class="row" style="background: white; box-shadow: 1px 1px 20px 1px lightgray; margin-bottom: 20px;">
                 <div class="col-md-6" style="padding: 0;">
                     <div class="row">
-                        <img src=" {{ $item->images[0]->title }} " style="width: 100%; border: 2px solid white; box-shadow: 4px 4px 4px 1px lightgrey;
-                        ">
+                        @foreach ($item->images as $image)
+                        @if ($loop->first)
+                        <img src=" {{ $image->title }} "
+                            style="width: 100%; border: 2px solid white; box-shadow: 4px 4px 4px 1px lightgrey;">
+                        @break
+                        @endif
+                        @endforeach
                     </div>
                     <div class="row" style="margin-top: 10px">
                         @forelse ($item->images as $image)
