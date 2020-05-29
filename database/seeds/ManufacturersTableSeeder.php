@@ -13,15 +13,31 @@ class ManufacturersTableSeeder extends Seeder
     public function run()
     {
         $manufacturer = new Manufacturer();
+        $manufacturer->title = "Alfa Romeo";
+        $manufacturer->save();
+
+        $manufacturer = new Manufacturer();
+        $manufacturer->title = "Aston Martin";
+        $manufacturer->save();
+
+        $manufacturer = new Manufacturer();
         $manufacturer->title = "Audi";
         $manufacturer->save();
 
-        $manufacturer2 = new Manufacturer();
-        $manufacturer2->title = "Golf";
-        $manufacturer2->save();
+        $manufacturer = new Manufacturer();
+        $manufacturer->title = "Aston Martin";
+        $manufacturer->save();
 
-        $manufacturer3 = new Manufacturer();
-        $manufacturer3->title = "Peugeot";
-        $manufacturer3->save();
+        $manufacturer = new Manufacturer();
+        $manufacturer->title = "Austin/Mini";
+        $manufacturer->save();
+
+        $manufacturer = new Manufacturer();
+        $manufacturer->title = "Bentley";
+        $manufacturer->save();
+
+        $manufacturer = new Manufacturer();
+        $manufacturer->title = "BMW";
+        $manufacturer->save();
     }
 }

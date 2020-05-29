@@ -116,6 +116,33 @@
                                     data-target="#deleteItemModal{{ $item->id }}" title="Ukloni artikl"><i
                                         class="far fa-trash-alt"></i> Ukloni artikl
                                 </button>
+                                <div class="modal fade" id="deleteItemModal{{ $item->id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                    style="text-transform: none; text-align: left">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Ukloni artikl</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="/artikli/{{ $item->id }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-body">
+                                                    <p>Jeste li sigurni da želite ukloniti artikl sa nazivom
+                                                        "{{ $item->title }}"?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="far fa-trash-alt"></i> Ukloni</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             @endif
                         </div>
@@ -245,7 +272,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="newManufacturer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">

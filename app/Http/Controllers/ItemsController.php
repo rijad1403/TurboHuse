@@ -143,7 +143,9 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+        $item->delete();
+        return redirect('/artikli')->with('success', 'Artikl ' . "$item->title" . ' uklonjen.');
     }
 
     public function search(Request $request)
