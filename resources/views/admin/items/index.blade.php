@@ -203,14 +203,14 @@
                     </div>
                     <div class="form-group">
                         <label for="imageUpload" class="imageUpload">
-                            <i class="fas fa-images"></i>
-                            Upload slike/slika artikla
+                            <i class="fas fa-file-upload"></i>
+                            Upload slike/slika artikla <br>
                             <input type="file" name="image_upload[]" id="imageUpload" multiple>
                         </label>
                         <div class="loaderText" style="text-align: center; display: none;">
                             Slika/slike se uploadaju, pričekajte trenutak...
                         </div>
-                        <div class="loader" style="display: block; margin: auto; display: none;"></div>
+                        <div class="loader" style="margin: auto; display: none;"></div>
 
                     </div>
                     <style>
@@ -219,9 +219,6 @@
                         }
 
                         .imageUpload {
-                            border: 1px solid #ccc;
-                            display: inline-block;
-                            padding: 6px 12px;
                             cursor: pointer;
                         }
                     </style>

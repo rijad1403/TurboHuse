@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreItem;
+use App\Http\Requests\UpdateItem;
 use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -123,8 +124,9 @@ class ItemsController extends Controller
      */
 
 
-    public function update(StoreItem $request, $id)
+    public function update(UpdateItem $request, $id)
     {
+        $item = Item::where('title', $request->title)->get();
         $item = Item::find($id);
         $item->title = $request->title;
         $item->price = $request->price;
@@ -132,7 +134,23 @@ class ItemsController extends Controller
         $item->body = $request->body;
         $item->releaseYear = $request->releaseYear;
         $item->save();
-        return redirect('/artikli')->with('success', 'Artikl ' . "$request->title" . ' ažuriran.');
+
+        $imageUrls = collect();
+        if ($request->hasFile('image_upload')) {
+            foreach ($request->file('image_upload') as $image) {
+                $imagePath = $image->getRealPath();
+                Cloudder::upload($imagePath, null);
+                $imageUrls->push(Cloudder::getResult()['url']);
+                $itemImage = new Image();
+                $itemImage->item_id = $item->id;
+                $itemImage->title = Cloudder::getResult()['url'];
+                $itemImage->save();
+            };
+        }
+
+        // return response()->json(['message' => 'upload']);
+
+        return back()->with('success', 'Artikl ' . "$request->title" . ' ažuriran.');
     }
 
     /**

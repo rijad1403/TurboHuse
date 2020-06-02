@@ -53,4 +53,6 @@ Route::put('/korisnici/{user}', 'UsersController@updateUser')->middleware('admin
 Route::post('/korisnici/store', 'UsersController@store')->middleware('admin');
 Route::get('/korisnici/{user}', 'UsersController@show')->middleware('admin');
 
+Route::delete('/slike/{item}', 'ImagesController@destroy')->middleware('admin');
+
 Route::get('/kupovine', 'CartsController@index')->middleware('admin');

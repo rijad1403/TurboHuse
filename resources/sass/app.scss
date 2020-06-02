@@ -374,3 +374,23 @@ footer .row .col-12 {
         transform: rotate(360deg);
     }
 }
+
+.itemImage {
+    width: 31%;
+    border: 2px solid white;
+    box-shadow: 4px 4px 4px 1px lightgrey;
+    cursor: pointer;
+}
+
+.selectedItemImage {
+    border: 5px outset #ff9900 !important;
+    border-radius: 5px;
+}
+
+input[type="file"] {
+    /* display: none; */
+}
+
+.imageUpload {
+    cursor: pointer;
+}

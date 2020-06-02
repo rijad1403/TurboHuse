@@ -8,9 +8,23 @@
             <hr>
         </div>
     </div>
-    <div class="row items justify-content-center">
+    <div class="row justify-content-center">
         <div class="col-lg-4">
-            @if ($errors->any())
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @elseif (session('warning'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ session('warning') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @elseif ($errors->any())
             @foreach ($errors->all() as $error)
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ $error }}
@@ -20,7 +34,11 @@
             </div>
             @endforeach
             @endif
-            <form action="/artikli/{{ $item->id }}" method="POST">
+        </div>
+    </div>
+    <div class="row items justify-content-center">
+        <div class="col-lg-4">
+            <form action="/artikli/{{ $item->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -58,9 +76,73 @@
                     <input type="text" name="releaseYear" id="releaseYear" class="form-control" placeholder="Npr. 2005"
                         value="{{$item->releaseYear}}">
                 </div>
-                <button class="btn btn-primary" type="submit"><i class="far fa-save"></i> Ažuriraj</button>
+                <div class="form-group">
+                    <label for="imageUpload" class="imageUpload">
+                        <i class="fas fa-file-upload"></i>
+                        Upload slike/slika artikla <br>
+                        <input type="file" name="image_upload[]" id="imageUpload" multiple>
+                    </label>
+                    <div class="loaderText" style="text-align: center; display: none;">
+                        Slika/slike se uploadaju, pričekajte trenutak...
+                    </div>
+                    <div class="loader" style="margin: auto; display: none;"></div>
+                </div>
+
+                <button class="btn btn-primary" type="submit" id="saveItemButton"><i class="far fa-save"></i>
+                    Ažuriraj</button>
             </form>
         </div>
+        <div class="col-lg-4">
+            <form action="/slike/{{ $item->id }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="selected_images" class="selectedImages" id="selectedImages" value="">
+                <div class="form-group">
+                    <label for="images" class="images">
+                        <i class="fas fa-images"></i>
+                        Slike/slika artikla <br>
+                    </label>
+                    <div>
+                        @forelse ($item->images as $image)
+                        <img src=" {{ $image->title }} " name="item_image" class="itemImage"
+                            id="itemImage{{ $image->id }}">
+                        @empty
+
+                        @endforelse
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit"><i class="far fa-trash-alt"></i>
+                    Ukloni odabrane slike</button>
+            </form>
+        </div>
+        <script>
+            let selectedImages = [];
+            document.querySelectorAll('.itemImage').forEach(itemImage => {
+                itemImage.addEventListener('click', () => {
+                    const id = itemImage.id.replace('itemImage', '');
+                    if(selectedImages.find(image => image.id === id)) {
+                        selectedImages = selectedImages.filter(image => image.id !== id);
+                        itemImage.classList.remove('selectedItemImage');
+                        document.querySelector('.selectedImages').value = JSON.stringify(selectedImages);
+                        console.log(selectedImages);
+                    } else {
+                        selectedImages.push({id: id});
+                        itemImage.classList.add('selectedItemImage');
+                        document.querySelector('.selectedImages').value = JSON.stringify(selectedImages);
+                        console.log(selectedImages);
+                    }
+                    }
+                );
+            })
+            $(document).ready(() => {
+                $('#saveItemButton').on('click', () => {
+                    if($('#imageUpload')[0].files.length > 0) {
+                        $('.loaderText').css('display', 'block');
+                        $('.loader').css('display', 'block');
+                    }
+                })
+            })
+        </script>
     </div>
 </div>
 
