@@ -5,6 +5,7 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 @import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "../../node_modules/lightbox2/src/css/lightbox.css";
 
 // Global
 body {
@@ -126,24 +127,15 @@ nav {
     border-bottom: 10px solid #ff9900;
 }
 
-.hero img {
-    width: 100%;
-    height: 100%;
-}
-
-.hero-image {
+.heroSection {
     position: relative;
-}
-
-.dark-color {
-    width: 100%;
-    height: 100%;
-    background: black;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    opacity: 0.5;
+    min-height: 850px;
+    background-image: url("http://127.0.0.1:8000/images/heroImage.jpg");
+    background-color: rgb(161, 140, 140);
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .hero-text {
@@ -153,46 +145,12 @@ nav {
     transform: translate(-50%, -50%);
     color: white;
     text-shadow: 2px 2px 8px #101010;
-    z-index: 1;
     text-transform: uppercase;
     text-align: center;
 }
 
 .hero-text h1 {
-    font-size: 150px;
-    position: relative;
-    animation-name: moving-h1;
-    animation-duration: 2s;
-    animation-timing-function: ease-in-out;
-}
-
-.hero-text h3 {
-    position: relative;
-    animation-name: moving-h2;
-    animation-duration: 2s;
-    animation-timing-function: ease-in-out;
-    overflow: hidden;
-}
-
-@keyframes moving-h1 {
-    from {
-        left: -50%;
-        overflow: hidden;
-    }
-    to {
-        left: 0;
-        overflow: hidden;
-    }
-}
-
-@keyframes moving-h2 {
-    from {
-        left: 50%;
-        overflow: hidden;
-    }
-    to {
-        left: 0;
-    }
+    font-size: 10rem;
 }
 
 // Buttons
@@ -334,7 +292,7 @@ footer .row .col-12 {
 }
 
 .page-item.active .page-link {
-    z-index: 3;
+    // z-index: 3;
     color: #fff;
     background-color: #ff9900;
     border-color: #ff9900;
@@ -393,4 +351,101 @@ input[type="file"] {
 
 .imageUpload {
     cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    background: #fe9b44;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    visibility: hidden;
+    transition: opacity 0.35s, visibility 0.35s, height 0.35s;
+    overflow: hidden;
+    z-index: 2;
+
+    &.open {
+        visibility: visible;
+        height: 100%;
+
+        li {
+            animation: fadeInRight 0.5s ease forwards;
+            animation-delay: 0.35s;
+
+            &:nth-of-type(2) {
+                animation-delay: 0.4s;
+            }
+            &:nth-of-type(3) {
+                animation-delay: 0.45s;
+            }
+            &:nth-of-type(4) {
+                animation-delay: 0.5s;
+            }
+        }
+    }
+    nav {
+        position: relative;
+        height: 70%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 50px;
+        font-weight: 400;
+        text-align: center;
+        background-color: #fe9b44;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        display: inline-block;
+        position: relative;
+        height: 100%;
+
+        li {
+            display: block;
+            height: 25%;
+            height: calc(100% / 4);
+            min-height: 50px;
+            position: relative;
+            opacity: 0;
+
+            a {
+                display: block;
+                position: relative;
+                color: white;
+                text-decoration: none;
+                overflow: hidden;
+
+                &:hover:after,
+                &:focus:after,
+                &:active:after {
+                    width: 100%;
+                }
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    width: 0%;
+                    transform: translateX(-50%);
+                    height: 3px;
+                    background: white;
+                    transition: 0.35s;
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        left: 20%;
+    }
+    100% {
+        opacity: 1;
+        left: 0;
+    }
 }

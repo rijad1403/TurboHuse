@@ -25,3 +25,78 @@
         @endif
     </ul>
 </nav>
+
+<div class="menu">
+    @if (!Auth::user() || Auth::user()->type == 'user' )
+    <a href="/kosara" class="nav-link"><i class="fas fa-shopping-cart"></i>
+        <span class="badge badge-secondary" id="quantity"></span>
+        <span class="badge badge-secondary" id="totalPrice"></span>
+    </a>
+    <a href="#" class="nav-link menu-button" id="toggle">
+        <i class="fas fa-bars"></i>
+    </a>
+    @endif
+</div>
+
+<div class="overlay" id="overlay">
+    <span id="close-menu" class="close-menu"><i class="fas fa-times"></i></span>
+    <nav class="overlay-menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Work</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</div>
+
+<style>
+    .menu {
+        display: none;
+    }
+
+    .menu-button {
+        display: none;
+    }
+
+    .close-menu {
+        font-size: 40px;
+        position: absolute;
+        right: 10%;
+        top: 5%;
+        color: white;
+    }
+
+    @media only screen and (max-width: 991px) {
+        .navbar {
+            display: none;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: flex-end;
+
+        }
+
+        .menu-button {
+            display: initial;
+        }
+
+        .overlay {
+            display: initial;
+        }
+    }
+</style>
+
+<script>
+    $('#toggle').click(function() {
+   $(this).toggleClass('active');
+   $('#overlay').toggleClass('open');
+  });
+
+  $('#close-menu').on('click', () => {
+    $('#toggle').toggleClass('active');
+   $('#overlay').toggleClass('open');
+  })
+
+</script>
