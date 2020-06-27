@@ -4,9 +4,9 @@
             <div class="hero-text">
                 <h1>TurboHuse</h1>
                 <h3>Prodaja turbina za automobile</h3>
-                <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Započni s kupovinom</button>
+                <button class="btn btn-primary" id="shopButton"><i class="fas fa-shopping-cart"></i> Započni s
+                    kupovinom</button>
             </div>
-
         </div>
     </div>
 </div>

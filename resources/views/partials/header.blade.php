@@ -13,7 +13,8 @@
         </div>
         <div class="row">
             <div class="col-12 logo">
-                <img src=" {{asset('images/logo.png')}} " class="logo-image" alt="logo">
+                <img src=" {{asset('images/logo.png')}} " class="logo-image" alt="logo" onclick="location = '/'"
+                    style="cursor: pointer;">
             </div>
         </div>
     </div>

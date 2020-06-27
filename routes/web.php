@@ -24,7 +24,7 @@ Route::view('/kosara', 'cart.index')->middleware('not.admin');
 Route::post('/cart/store', 'CartsController@store')->middleware('not.admin');
 
 // Guest, user, admin
-Route::get('/', 'ItemsController@index');
+Route::view('/', 'welcome');
 Route::get('/artikli', 'ItemsController@index');
 Route::view('/onama', 'about');
 Route::view('/kontakt', 'contact');
@@ -46,6 +46,8 @@ Route::get('/proizvodjaci', 'ManufacturersController@index')->middleware('admin'
 Route::post('/proizvodjaci/save', 'ManufacturersController@store')->middleware('admin');
 Route::put('/proizvodjaci/{manufacturer}', 'ManufacturersController@update')->middleware('admin');
 Route::delete('/proizvodjaci/{manufacturer}', 'ManufacturersController@destroy')->middleware('admin');
+Route::delete('/proizvodjaci/search', 'ManufacturersController@search')->middleware('admin');
+
 
 
 Route::get('/korisnici', 'UsersController@index')->middleware('admin');

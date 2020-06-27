@@ -26,7 +26,7 @@ class ItemsController extends Controller
 
     public function index()
     {
-        $items = Item::latest()->get();
+        $items = Item::latest()->paginate(10);
         $manufacturers = Manufacturer::orderBy('title', 'asc')->get();
         return view('admin.items.index')->with(['items' => $items, 'manufacturers' => $manufacturers, 'filterMessage' => '']);
     }
@@ -179,7 +179,7 @@ class ItemsController extends Controller
             return $query->where('price', '<=', $maxPrice);
         })->when($releaseYear, function ($query, $releaseYear) {
             return $query->where('releaseYear', $releaseYear);
-        })->get();
+        })->paginate(10);
 
         $carFilter = $car ? 'proizvođač = ' . $manufacturers->find($car)->title . ';' : '';
         $maxPriceFilter = $maxPrice ? 'maximalna cijena = ' . $maxPrice . ' KM;' : '';

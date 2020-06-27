@@ -38,13 +38,23 @@
                 </div>
                 <div class="col-md-6" style="padding: 20px 10px;">
                     <p>
-                        Cijena: {{$item->price}} KM
+                        Pris: {{ number_format($item->price,2,",",".") }} DKK
                     </p>
                     <p>
-                        Proizvođač: {{$item->manufacturer->title}}
+                        Bilmærke: {{$item->manufacturer->title}}
                     </p>
-                    <p style="text-align: justify;">Opis: {{ $item->body }}
+                    <p style="text-align: justify;">Opis:
                     </p>
+                    <p id="desc"></p>
+
+                    <style>
+                        #desc>* {
+                            font-family: "Montserrat", sans-serif !important;
+                        }
+                    </style>
+                    <script>
+                        document.querySelector('#desc').innerHTML = @json($item->body);
+                    </script>
                     @if (!Auth::user() || Auth::user()->type == 'user')
                     <button class="btn btn-primary" onclick="addToCart({{ $item }})"><i class=" fas fa-cart-plus"></i>
                         Dodaj u košaru</button>

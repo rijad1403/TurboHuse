@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <p>
-                TurboHuse uspješno posluje i postoji od 2010. Bavimo se prodajom i reparacijom turbina za sve vrste
+                TurboHuse uspješno posluje i postoji od 2004. Bavimo se prodajom i reparacijom turbina za sve vrste
                 automobila.
             </p>
             <p>

@@ -32,20 +32,37 @@
         <span class="badge badge-secondary" id="quantity"></span>
         <span class="badge badge-secondary" id="totalPrice"></span>
     </a>
+    @endif
     <a href="#" class="nav-link menu-button" id="toggle">
         <i class="fas fa-bars"></i>
     </a>
-    @endif
 </div>
 
 <div class="overlay" id="overlay">
     <span id="close-menu" class="close-menu"><i class="fas fa-times"></i></span>
     <nav class="overlay-menu">
-        <ul>
+        {{-- <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Work</a></li>
             <li><a href="#">Contact</a></li>
+        </ul> --}}
+        <ul>
+            <li> <a href="/">početna</a></li>
+            <li> <a href="/artikli">artikli</a></li>
+            @if (Auth::user() && Auth::user()->type == 'admin')
+            <li> <a href="/proizvodjaci">proizvođači</a></li>
+            <li> <a href="/korisnici">korisnici</a></li>
+            @endif
+            <li> <a href="/onama">o nama</a></li>
+            <li> <a href="/kontakt">kontakt</a></li>
+            @if (Auth::user())
+            <li> <a href="/profil">profil</a></li>
+            <li> <a href="/odjava">odjava</a></li>
+            @else
+            <li> <a href="/prijava">prijava</a></li>
+            <li> <a href="/registracija">registracija</a></li>
+            @endif
         </ul>
     </nav>
 </div>

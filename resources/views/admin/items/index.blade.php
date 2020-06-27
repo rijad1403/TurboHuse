@@ -4,7 +4,7 @@
 <div class="container-fluid content">
     <div class="row mt-5">
         <div class="col-12">
-            <h2>artikli</h2>
+            <h2 id="itemsHeader">artikli</h2>
             <hr>
         </div>
     </div>
@@ -21,7 +21,7 @@
             @endif
             <form action="/artikli/search" method="GET">
                 <div class="form-group">
-                    <label for="car-select"><i class="fas fa-car"></i> Proizvođač</label>
+                    <label for="car-select"><i class="fas fa-car"></i> Bilmærke</label>
                     <select class="form-control" id="car-select" name="car">
                         <option value="">Izaberite proizvođača</option>
                         @forelse ($manufacturers as $manufacturer)
@@ -32,16 +32,17 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="price"><i class="fas fa-coins"></i> Cijena (KM)</label>
+                    <label for="price"><i class="fas fa-coins"></i> Pris Dansk kr inklusiv moms (DKK)</label>
                     <input type="text" name="maxPrice" id="price" class="form-control"
-                        placeholder="Maksimalna cijena, npr. 1000">
+                        placeholder="Maksimalna cijena, Eksempel 1000">
                 </div>
                 <div class="form-group">
-                    <label for="releaseYear"><i class="fas fa-calendar"></i> Godina proizvodnje</label>
-                    <input type="text" name="releaseYear" id="releaseYear" class="form-control" placeholder="Npr. 2005">
+                    <label for="releaseYear"><i class="fas fa-calendar"></i> Årgang</label>
+                    <input type="text" name="releaseYear" id="releaseYear" class="form-control"
+                        placeholder="Eksempel 2005">
                 </div>
 
-                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Pretraga artikala</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Søg</button>
             </form>
         </div>
 
@@ -92,7 +93,7 @@
                         <div class="card-body">
                             <small class="text-muted">{{$item->manufacturer->title}}</small>
                             <h5 class="card-title">{{$item->title}}</h5>
-                            <h5 class="card-title">{{$item->price}} KM</h5>
+                            <h5 class="card-title">{{ number_format($item->price,2,",",".") }} DKK</h5>
 
                             @if (!Auth::user() || Auth::user()->type !== 'admin' )
                             <div>
@@ -156,6 +157,8 @@
                 </div>
                 @endforelse
             </div>
+            {{ $items->links() }}
+
         </div>
     </div>
 </div>
@@ -182,7 +185,7 @@
                             placeholder="Opis artikla"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="car-select"><i class="fas fa-car"></i> Proizvođač</label>
+                        <label for="car-select"><i class="fas fa-car"></i> Bilmærke</label>
                         <select class="form-control" id="car-select" name="car">
                             @forelse ($manufacturers as $manufacturer)
                             <option value={{ $manufacturer->id }}>{{ $manufacturer->title }}</option>
@@ -192,14 +195,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="price"><i class="fas fa-coins"></i> Cijena (KM)</label>
-                        <input type="number" name="price" id="price" class="form-control"
-                            placeholder="Cijena, npr. 100">
+                        <label for="price"><i class="fas fa-coins"></i> Pris Dansk kr inklusiv moms (DKK)</label>
+                        <input type="number" name="price" id="price" class="form-control" placeholder="Eksempel 1000">
                     </div>
                     <div class="form-group">
-                        <label for="releaseYear"><i class="fas fa-calendar"></i> Godina proizvodnje</label>
+                        <label for="releaseYear"><i class="fas fa-calendar"></i> Årgang</label>
                         <input type="number" name="releaseYear" id="releaseYear" class="form-control"
-                            placeholder="Npr. 2005">
+                            placeholder="Eksempel 2005">
                     </div>
                     <div class="form-group">
                         <label for="imageUpload" class="imageUpload">
@@ -294,5 +296,10 @@
         </div>
     </div>
 </div>
+
+<script>
+
+</script>
+
 
 @endsection

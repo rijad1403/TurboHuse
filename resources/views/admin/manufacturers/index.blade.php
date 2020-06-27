@@ -38,21 +38,14 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-12">
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="" placeholder="Unesite naziv proizvođača">
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-search"></i> Pretraga
-                    </button>
-                </div>
-            </form>
+            <div class="form-group">
+                <input type="text" class="form-control" id="manufacturerSearch" placeholder="Pretraga proizvođača">
+            </div>
             <div class="form-group">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#newManufacturer">
                     <i class="fas fa-plus-circle"></i> Dodaj proizvođača</button>
             </div>
-            <table class="table" style="width: 500px;">
+            <table class="table manufacturersTable">
                 <thead>
                     <tr>
                         <th scope="col" colspan="2">Naziv proizvođača</th>
@@ -60,7 +53,7 @@
                 </thead>
                 <tbody>
                     @forelse ($manufacturers as $manufacturer)
-                    <tr>
+                    <tr class="manufacturerRow">
                         <td>{{ $manufacturer->title }}</td>
                         <td>
                             <button class="btn btn-primary" data-toggle="modal"
@@ -88,9 +81,11 @@
                                     @method('PUT')
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <label for="title"><i class="fas fa-car"></i> Naziv proizvođača</label>
-                                            <input type="text" name="title" id="title" class="form-control"
-                                                value="{{ $manufacturer->title }}" placeholder="Naziv proizvođača">
+                                            <label for="title{{ $manufacturer->id }}"><i class="fas fa-car"></i> Naziv
+                                                proizvođača</label>
+                                            <input type="text" name="title" id="title{{ $manufacturer->id }}"
+                                                class="form-control" value="{{ $manufacturer->title }}"
+                                                placeholder="Naziv proizvođača">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -162,6 +157,23 @@
             </div>
         </div>
     </div>
-
 </div>
+
+
+<script>
+    const search = document.querySelector('#manufacturerSearch');
+    const manufactureRows = document.querySelectorAll('.manufacturerRow');
+    document.querySelector('#manufacturerSearch').addEventListener('keyup', () => {
+        manufactureRows.forEach(row => {
+            if(row.querySelector('td').innerText.toLowerCase().indexOf(search.value.toLowerCase()) !== -1) {
+                row.style.display = 'table-row';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+
+</script>
+
+
 @endsection
