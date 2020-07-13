@@ -4,7 +4,7 @@
 <div class="container-fluid content">
     <div class="row mt-5">
         <div class="col-12">
-            <h2>Proizvođači</h2>
+            <h2>Producenter</h2>
             <hr>
         </div>
     </div>
@@ -39,16 +39,16 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="form-group">
-                <input type="text" class="form-control" id="manufacturerSearch" placeholder="Pretraga proizvođača">
+                <input type="text" class="form-control" id="manufacturerSearch" placeholder="Søg">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#newManufacturer">
-                    <i class="fas fa-plus-circle"></i> Dodaj proizvođača</button>
+                    <i class="fas fa-plus-circle"></i> Tilføj producent</button>
             </div>
             <table class="table manufacturersTable">
                 <thead>
                     <tr>
-                        <th scope="col" colspan="2">Naziv proizvođača</th>
+                        <th scope="col" colspan="2">Producent Navn</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,7 +110,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <div class="modal-body">
-                                        <p>Jeste li sigurni da želite ukloniti proizvođača sa nazivom
+                                        <p>Er du sikker på at du gerne vil slette producent
                                             "{{ $manufacturer->title }}"?</p>
                                     </div>
                                     <div class="modal-footer">
@@ -136,7 +136,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Novi proizvođač</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Novi Producent</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -145,13 +145,13 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="title"><i class="fas fa-car"></i> Naziv</label>
+                            <label for="title"><i class="fas fa-car"></i> Navn</label>
                             <input type="text" name="title" id="title" class="form-control"
-                                placeholder="Naziv proizvođača">
+                                placeholder="Producent Navn">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Spremi</button>
+                        <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Gem</button>
                     </div>
                 </form>
             </div>

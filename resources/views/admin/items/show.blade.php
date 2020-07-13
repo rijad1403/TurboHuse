@@ -43,7 +43,7 @@
                     <p>
                         Bilmærke: {{$item->manufacturer->title}}
                     </p>
-                    <p style="text-align: justify;">Opis:
+                    <p style="text-align: justify;">Beskrivelse:
                     </p>
                     <p id="desc"></p>
 
@@ -57,7 +57,7 @@
                     </script>
                     @if (!Auth::user() || Auth::user()->type == 'user')
                     <button class="btn btn-primary" onclick="addToCart({{ $item }})"><i class=" fas fa-cart-plus"></i>
-                        Dodaj u košaru</button>
+                        Tilføj til kurv</button>
                     @endif
                 </div>
             </div>

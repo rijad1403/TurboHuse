@@ -4,7 +4,7 @@
 <div class="container-fluid content">
     <div class="row mt-5">
         <div class="col-12">
-            <h2>Registracija</h2>
+            <h2>Registrer bruger</h2>
             <hr>
         </div>
     </div>
@@ -45,44 +45,44 @@
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="name"><i class="fas fa-user"></i> Ime i prezime</label>
+                                <label for="name"><i class="fas fa-user"></i> Fornavn og efternavn</label>
                                 <input type="text" name="name" id="name" class="form-control"
-                                    placeholder="Ime i prezime">
+                                    placeholder="Fornavn og efternavn">
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="fas fa-envelope"></i> Email</label>
                                 <input type="email" name="email" id="email" class="form-control" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <label for="password"><i class="fas fa-key"></i> Lozinka</label>
+                                <label for="password"><i class="fas fa-key"></i> Adgangskode</label>
                                 <input type="password" name="password" id="password" class="form-control"
-                                    placeholder="Lozinka">
+                                    placeholder="Adgangskode">
                             </div>
                             <div class="form-group">
-                                <label for="city"><i class="fas fa-city"></i> Grad</label>
-                                <input type="text" name="city" id="city" class="form-control" placeholder="Grad">
+                                <label for="city"><i class="fas fa-city"></i> By</label>
+                                <input type="text" name="city" id="city" class="form-control" placeholder="By">
                             </div>
                             <div class="form-group">
-                                <label for="state"><i class="fas fa-globe"></i> Država</label>
-                                <input type="text" name="state" id="state" class="form-control" placeholder="Država">
+                                <label for="state"><i class="fas fa-globe"></i> Land</label>
+                                <input type="text" name="state" id="state" class="form-control" placeholder="Land">
                             </div>
                             <div class="form-group">
-                                <label for="street"><i class="fas fa-map-marker-alt"></i> Ulica</label>
+                                <label for="street"><i class="fas fa-map-marker-alt"></i> Addresse</label>
                                 <input type="text" name="street" id="street" class="form-control"
-                                    placeholder="Ulica, broj kuće">
+                                    placeholder="Addresse">
                             </div>
                             <div class="form-group">
                                 <label for="phone"><i class="fas fa-phone-square-alt"></i> Telefon</label>
                                 <input type="text" name="phone" id="phone" class="form-control" placeholder="Telefon">
                             </div>
                             <div class="form-group">
-                                <label for="zip_code"><i class="fas fa-file-invoice"></i> Poštanski broj</label>
+                                <label for="zip_code"><i class="fas fa-file-invoice"></i> Postnummer</label>
                                 <input type="text" name="zip_code" id="zip_code" class="form-control"
-                                    placeholder="Poštanski broj">
+                                    placeholder="Postnummer">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fas fa-user-plus"></i>
-                            Registracija</button>
+                            Registrer bruger</button>
                     </form>
                 </div>
             </div>

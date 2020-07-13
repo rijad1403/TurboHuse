@@ -4,7 +4,7 @@
 <div class="container-fluid content">
     <div class="row mt-5">
         <div class="col-12">
-            <h2 id="itemsHeader">artikli</h2>
+            <h2 id="itemsHeader">produkter</h2>
             <hr>
         </div>
     </div>
@@ -13,17 +13,17 @@
             @if(Auth::user() && Auth::user()->type == "admin")
             <div class="form-group">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#newItem"><i
-                        class="fas fa-plus-circle"></i> Dodaj artikl</button>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#newManufacturer"><i class="fas
-                    fa-plus-circle"></i> Dodaj
-                    proizvođača</button>
+                        class="fas fa-plus-circle"></i>Tilføj produkt</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#newManufacturer">
+                    <i class="fas fa-plus-circle"></i>Tilføj producent
+                </button>
             </div>
             @endif
             <form action="/artikli/search" method="GET">
                 <div class="form-group">
                     <label for="car-select"><i class="fas fa-car"></i> Bilmærke</label>
                     <select class="form-control" id="car-select" name="car">
-                        <option value="">Izaberite proizvođača</option>
+                        <option value="">Vælg producent</option>
                         @forelse ($manufacturers as $manufacturer)
                         <option value={{ $manufacturer->id }}>{{ $manufacturer->title }}</option>
                         @empty
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label for="price"><i class="fas fa-coins"></i> Pris Dansk kr inklusiv moms (DKK)</label>
                     <input type="text" name="maxPrice" id="price" class="form-control"
-                        placeholder="Maksimalna cijena, Eksempel 1000">
+                        placeholder="Maks pris, f.eks. 1000 kr.">
                 </div>
                 <div class="form-group">
                     <label for="releaseYear"><i class="fas fa-calendar"></i> Årgang</label>
@@ -98,7 +98,7 @@
                             @if (!Auth::user() || Auth::user()->type !== 'admin' )
                             <div>
                                 <button class="btn btn-primary" onclick="addToCart({{ $item }})">
-                                    <i class="fas fa-cart-plus"></i> Dodaj u košaru
+                                    <i class="fas fa-cart-plus"></i> Tilføj til kurv
                                 </button>
                             </div>
                             @endif
@@ -106,16 +106,16 @@
                                 <a class="btn btn-primary" href="/artikli/{{$item->id}}" role="button"
                                     style="text-transform: initial; border-radius: 0;"><i
                                         class="fas fa-info-circle"></i>
-                                    Opširnije</a>
+                                    Udvidet</a>
                             </div>
                             @if (Auth::user() && Auth::user()->type == "admin")
                             <div>
                                 <a class="btn btn-primary" href="/artikli/{{$item->id}}/uredi" role="button"
                                     style="text-transform: initial; border-radius: 0;"><i class="fas fa-edit"></i>
-                                    Uredi artikl</a> <br>
+                                    Rediger produkt</a> <br>
                                 <button class="btn btn-primary" data-toggle="modal"
                                     data-target="#deleteItemModal{{ $item->id }}" title="Ukloni artikl"><i
-                                        class="far fa-trash-alt"></i> Ukloni artikl
+                                        class="far fa-trash-alt"></i> Slet produkt
                                 </button>
                                 <div class="modal fade" id="deleteItemModal{{ $item->id }}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -123,7 +123,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Ukloni artikl</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Slet produkt</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -133,7 +133,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <div class="modal-body">
-                                                    <p>Jeste li sigurni da želite ukloniti artikl sa nazivom
+                                                    <p>Er du sikker på at du gerne vil slette produkt
                                                         "{{ $item->title }}"?</p>
                                                 </div>
                                                 <div class="modal-footer">
@@ -167,7 +167,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Artikl</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Produkt</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -176,13 +176,13 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="title"><i class="fas fa-heading"></i> Naziv</label>
-                        <input type="text" name="title" id="title" class="form-control" placeholder="Naziv artikla">
+                        <label for="title"><i class="fas fa-heading"></i> Navn</label>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Produkt Navn">
                     </div>
                     <div class="form-group">
-                        <label for="body"><i class="fas fa-file-signature"></i> Opis</label>
+                        <label for="body"><i class="fas fa-file-signature"></i> Beskrivelse</label>
                         <textarea name="body" id="body" class="form-control" cols="30" rows="10"
-                            placeholder="Opis artikla"></textarea>
+                            placeholder="Produkt beskrivelse"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="car-select"><i class="fas fa-car"></i> Bilmærke</label>
@@ -206,7 +206,7 @@
                     <div class="form-group">
                         <label for="imageUpload" class="imageUpload">
                             <i class="fas fa-file-upload"></i>
-                            Upload slike/slika artikla <br>
+                            Tilføj produkt billede/billeder <br>
                             <input type="file" name="image_upload[]" id="imageUpload" multiple>
                         </label>
                         <div class="loaderText" style="text-align: center; display: none;">
@@ -227,7 +227,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="saveItemButton"><i class="far fa-save"></i>
-                        Spremi</button>
+                        Gem</button>
                 </div>
             </form>
             <script>
@@ -285,12 +285,12 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="title"><i class="fas fa-car"></i> Naziv</label>
-                        <input type="text" name="title" id="title" class="form-control" placeholder="Naziv proizvođača">
+                        <label for="title"><i class="fas fa-car"></i> Navn</label>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Producent Navn">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Spremi</button>
+                    <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Gem</button>
                 </div>
             </form>
         </div>

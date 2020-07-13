@@ -4,7 +4,7 @@
 <div class="container-fluid content">
     <div class="row mt-5">
         <div class="col-12">
-            <h2>Prijava</h2>
+            <h2>Log ind</h2>
             <hr>
         </div>
     </div>
@@ -27,10 +27,10 @@
                     <input type="email" name="email" id="email" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="password"><i class="fas fa-key"></i> Lozinka</label>
+                    <label for="password"><i class="fas fa-key"></i> Adgangskode</label>
                     <input type="password" name="password" id="password" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Prijava</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Log ind</button>
             </form>
         </div>
 

@@ -33,6 +33,7 @@ Route::get('/artikli/{item}', 'ItemsController@show');
 
 // User, admin
 Route::get('/profil', 'UsersController@myProfile')->middleware('not.guest');
+Route::get('/narudzbe', 'BuyingsController@index')->middleware('not.guest');
 Route::get('/odjava', 'Auth\LoginController@logout')->middleware('not.guest');
 Route::put('/profil/{user}', 'UsersController@updateProfile')->middleware('not.guest');
 

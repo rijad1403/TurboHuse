@@ -4,7 +4,7 @@
 <div class="container-fluid content">
     <div class="row mt-5">
         <div class="col-12">
-            <h2>Korisnici</h2>
+            <h2>Brugere</h2>
             <hr>
         </div>
     </div>
@@ -40,11 +40,11 @@
         <div class="col-12">
             <form>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="" placeholder="Unesite ime, prezime ili email">
+                    <input type="text" class="form-control" id="" placeholder="Fornavn, efternavn, email">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary">
-                        <i class="fas fa-search"></i> Pretraga
+                        <i class="fas fa-search"></i> Søg
                     </button>
                 </div>
             </form>
@@ -56,11 +56,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Ime i prezime</th>
+                        <th scope="col">Fornavn og efternavn</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Tip korisnika</th>
+                        <th scope="col">Brugertype</th>
                         <th scope="col">Kupovine</th>
-                        <th scope="col">Država, grad, ulica, poštanski broj</th>
+                        <th scope="col">Land, by, adresse</th>
                         <th scope="col">Opcije</th>
 
                     </tr>
@@ -92,12 +92,12 @@
                         </td>
                         <td>
                             <button class="btn btn-primary" data-toggle="modal"
-                                data-target="#exampleModal{{ $user->id }}" title="Ažuriraj korisnika"><i
+                                data-target="#exampleModal{{ $user->id }}" title="Rediger bruger"><i
                                     class="far fa-edit"></i>
                             </button>
-                            <button class="btn btn-primary" title="Obriši korisnika"><i class="far fa-trash-alt"></i>
+                            <button class="btn btn-primary" title="Slet bruger"><i class="far fa-trash-alt"></i>
                             </button>
-                            <button class="btn btn-primary" title="Pošalji email korisniku"><i
+                            <button class="btn btn-primary" title="Send email til bruger"><i
                                     class="far fa-envelope"></i>
                             </button>
                         </td>
@@ -107,7 +107,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Ažuriraj korisnika</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Rediger bruger</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -117,9 +117,9 @@
                                     @method('PUT')
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <label for="name"><i class="fas fa-user"></i> Ime i prezime</label>
+                                            <label for="name"><i class="fas fa-user"></i> Fornavn og efternavn</label>
                                             <input type="text" name="name" id="name" class="form-control"
-                                                value="{{ $user->name }}" placeholder="Ime i prezime">
+                                                value="{{ $user->name }}" placeholder="Fornavn og efternavn">
                                         </div>
                                         <div class="form-group">
                                             <label for="email"><i class="fas fa-envelope"></i> Email</label>
@@ -141,31 +141,31 @@
                                         </select>
                                     </div> --}}
                                     <div class="form-group">
-                                        <label for="city"><i class="fas fa-city"></i> Grad</label>
+                                        <label for="city"><i class="fas fa-city"></i> By</label>
                                         <input type="text" name="city" id="city" class="form-control"
-                                            value="{{ $user->city }}" placeholder="Grad">
+                                            value="{{ $user->city }}" placeholder="By">
                                     </div>
                                     <div class="form-group">
-                                        <label for="state"><i class="fas fa-globe"></i> Država</label>
+                                        <label for="state"><i class="fas fa-globe"></i> Land</label>
                                         <input type="text" name="state" id="state" class="form-control"
-                                            value="{{ $user->state }}" placeholder="Država">
+                                            value="{{ $user->state }}" placeholder="Land">
                                     </div>
                                     <div class="form-group">
-                                        <label for="street"><i class="fas fa-map-marker-alt"></i> Ulica, broj
-                                            kuće</label>
+                                        <label for="street"><i class="fas fa-map-marker-alt"></i> Adresse</label>
                                         <input type="text" name="street" id="street" class="form-control"
-                                            value="{{ $user->street }}" placeholder="Ulica, broj kuće">
+                                            value="{{ $user->street }}" placeholder="Adresse">
                                     </div>
                                     <div class="form-group">
-                                        <label for="zipCode"><i class="fas fa-file-invoice"></i> Poštanski
-                                            broj</label>
+                                        <label for="zipCode"><i class="fas fa-file-invoice"></i>
+                                            Postnummer
+                                        </label>
                                         <input type="text" name="zip_code" id="zipCode" class="form-control"
-                                            value="{{ $user->zip_code }}" placeholder="Poštanski broj">
+                                            value="{{ $user->zip_code }}" placeholder="Postnummer">
                                     </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary"><i class="far fa-save"></i>
-                                    Spremi</button>
+                                    Gem</button>
                             </div>
                             </form>
                         </div>
@@ -196,54 +196,56 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name"><i class="fas fa-user"></i> Ime i prezime</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Ime i prezime">
+                        <label for="name"><i class="fas fa-user"></i> Fornavn og efternavn</label>
+                        <input type="text" name="name" id="name" class="form-control"
+                            placeholder=" Fornavn og efternavn">
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope"></i> Email</label>
                         <input type="email" name="email" id="email" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <label for="password"><i class="fas fa-key"></i> Lozinka</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Lozinka">
+                        <label for="password"><i class="fas fa-key"></i> Adgangskode</label>
+                        <input type="password" name="password" id="password" class="form-control"
+                            placeholder="Adgangskode">
                     </div>
                     <div class="form-group">
                         <label for="phone"><i class="fas fa-phone-square-alt"></i> Telefon</label>
                         <input type="text" name="phone" id="phone" class="form-control" placeholder="Telefon">
                     </div>
                     <div class="form-group">
-                        <label for="type"><i class="fas fa-user"></i> Tip korisnika</label>
+                        <label for="type"><i class="fas fa-user"></i> Brugertype</label>
                         <select class="form-control" id="type" name="type">
                             <option value="user">
-                                Korisnik</option>
+                                Bruger</option>
                             <option value="admin">
                                 Administrator</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="city"><i class="fas fa-city"></i> Grad</label>
-                        <input type="text" name="city" id="city" class="form-control" placeholder=" Grad">
+                        <label for="city"><i class="fas fa-city"></i> By</label>
+                        <input type="text" name="city" id="city" class="form-control" placeholder=" By">
                     </div>
                     <div class="form-group">
-                        <label for="state"><i class="fas fa-globe"></i> Država</label>
-                        <input type="text" name="state" id="state" class="form-control" placeholder="Država">
+                        <label for="state"><i class="fas fa-globe"></i> Land</label>
+                        <input type="text" name="state" id="state" class="form-control" placeholder="Land">
                     </div>
                     <div class="form-group">
-                        <label for="street"><i class="fas fa-map-marker-alt"></i> Ulica, broj
-                            kuće</label>
-                        <input type="text" name="street" id="street" class="form-control"
-                            placeholder="Ulica, broj kuće">
+                        <label for="street"><i class="fas fa-map-marker-alt"></i>
+                            Adresse
+                        </label>
+                        <input type="text" name="street" id="street" class="form-control" placeholder="Adresse">
                     </div>
                     <div class="form-group">
-                        <label for="zipCode"><i class="fas fa-file-invoice"></i> Poštanski
-                            broj</label>
-                        <input type="text" name="zip_code" id="zipCode" class="form-control"
-                            placeholder="Poštanski broj">
+                        <label for="zipCode"><i class="fas fa-file-invoice"></i>
+                            Postnummer
+                        </label>
+                        <input type="text" name="zip_code" id="zipCode" class="form-control" placeholder="Postnummer">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"><i class="far fa-save"></i>
-                        Spremi</button>
+                        Gem</button>
                 </div>
             </form>
         </div>

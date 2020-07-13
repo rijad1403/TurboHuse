@@ -14,10 +14,10 @@
             <div class="col-md-4">
                 <form action="" method="post">
                     <div class="form-group">
-                        <input type="text" name="" id="" class="form-control" placeholder="Unesite Vaš email">
+                        <input type="text" name="" id="" class="form-control" placeholder="Indtast din email">
                     </div>
-                    <button class="btn btn-primary"><i class="fas fa-envelope-open-text"></i> Prijava na
-                        newsletter
+                    <button class="btn btn-primary"><i class="fas fa-envelope-open-text"></i>
+                        Tilmeld dig vores nyhedsbrev
                     </button>
                 </form>
             </div>
@@ -152,7 +152,7 @@
                 const element2 = document.createElement('div');
                 element2.classList.add('row');
                 element2.classList.add('justify-content-center');
-                element2.innerHTML = '<a href="/artikli" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Započni s kupovinom</a href="/artikli">'
+                element2.innerHTML = '<a href="/artikli" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Udforsk vores produkter</a href="/artikli">'
                 cartItemsContainer.appendChild(element);
                 cartItemsContainer.appendChild(element2);
 

@@ -4,33 +4,33 @@
 <div class="container-fluid content">
     <div class="row">
         <div class="col-lg-6 mt-5">
-            <h2>Kontakt forma</h2>
+            <h2>Kontakt form</h2>
             <hr>
             <form action="/sendMail" method="post">
                 <div class="form-group">
-                    <label for="name">Vaše ime i prezime*</label>
+                    <label for="name">Fornavn og efternavn*</label>
                     <input type="text" name="name" id="" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="email">Vaš e-mail*</label>
+                    <label for="email">Email*</label>
                     <input type="email" name="email" id="" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="subject">Predmet*</label>
+                    <label for="subject">Emne*</label>
                     <input type="text" name="subject" id="" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="body">Vaša poruka*</label>
+                    <label for="body">Besked*</label>
                     <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <small class="form-text text-muted">Polja sa oznakom (*) su obavezna.</small>
+                    <small class="form-text text-muted">Felter markeret med (*) skal udfyldes.</small>
                 </div>
-                <button type="submit"><i class="fas fa-envelope"></i> Pošalji</button>
+                <button type="submit"><i class="fas fa-envelope"></i> Send</button>
             </form>
         </div>
         <div class="col-lg-6 mt-5">
-            <h2>Posjetite nas</h2>
+            <h2>Besøg Os</h2>
             <hr>
             <p>
                 <i class="fas fa-warehouse"></i> TurboHuse

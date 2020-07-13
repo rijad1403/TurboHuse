@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Buying;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BuyingsController extends Controller
 {
@@ -14,6 +15,17 @@ class BuyingsController extends Controller
      */
     public function index()
     {
+        if (Auth::check()) {
+            $buyings = collect();
+            if (Auth::user()->type == 'admin') {
+                $buyings = Buying::all();
+            } else if (Auth::user()->type == 'user') {
+                $buyings = Auth::user()->buyings;
+            }
+            return view('admin.buyings.index', ['user' => Auth::user(), 'buyings' => $buyings]);
+        } else {
+            return redirect('/prijava');
+        }
         //
     }
 

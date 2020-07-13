@@ -4,7 +4,7 @@
 <div class="container-fluid content">
     <div class="row mt-5">
         <div class="col-12">
-            <h2>košara</h2>
+            <h2>kurv</h2>
             <hr>
         </div>
     </div>
@@ -13,8 +13,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col" colspan="2" style="text-align: center;">Artikl</th>
-                        <th scope="col">Cijena</th>
+                        <th scope="col" colspan="2" style="text-align: center;">Produkt</th>
+                        <th scope="col">Pris</th>
                         <th scope="col">Količina</th>
                         <th scope="col"></th>
                     </tr>
@@ -36,8 +36,8 @@
             <form action="/cart/store" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="name"><i class="fas fa-user"></i> Ime i prezime</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Ime i prezime"
+                    <label for="name"><i class="fas fa-user"></i> Fornavn og efternavn</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Fornavn og efternavn"
                         value="{{ Auth::user() ? Auth::user()->name : '' }}">
                 </div>
                 <div class="form-group">
@@ -51,23 +51,23 @@
                         value="{{ Auth::user() ? Auth::user()->phone : '' }}">
                 </div>
                 <div class="form-group">
-                    <label for="street"><i class="fas fa-map-marker-alt"></i> Ulica</label>
-                    <input type="text" name="street" id="street" class="form-control" placeholder="Ulica, broj kuće"
+                    <label for="street"><i class="fas fa-map-marker-alt"></i> Addresse</label>
+                    <input type="text" name="street" id="street" class="form-control" placeholder="Addresse"
                         value="{{ Auth::user() ? Auth::user()->street : '' }}">
                 </div>
                 <div class="form-group">
-                    <label for="city"><i class="fas fa-city"></i> Grad</label>
-                    <input type="text" name="city" id="city" class="form-control" placeholder="Grad"
+                    <label for="city"><i class="fas fa-city"></i> By</label>
+                    <input type="text" name="city" id="city" class="form-control" placeholder="By"
                         value="{{ Auth::user() ? Auth::user()->city : '' }}">
                 </div>
                 <div class="form-group">
-                    <label for="state"><i class="fas fa-globe"></i> Država</label>
-                    <input type="text" name="state" id="state" class="form-control" placeholder="Država"
+                    <label for="state"><i class="fas fa-globe"></i> Land</label>
+                    <input type="text" name="state" id="state" class="form-control" placeholder="Land"
                         value="{{ Auth::user() ? Auth::user()->state : '' }}">
                 </div>
                 <div class="form-group">
-                    <label for="zip_code"><i class="fas fa-file-invoice"></i> Poštanski broj</label>
-                    <input type="text" name="zip_code" id="zip_code" class="form-control" placeholder="Poštanski broj"
+                    <label for="zip_code"><i class="fas fa-file-invoice"></i> Postnummer</label>
+                    <input type="text" name="zip_code" id="zip_code" class="form-control" placeholder="Postnummer"
                         value="{{ Auth::user() ? Auth::user()->zip_code : '' }}">
                 </div>
                 <input type="hidden" name="cart_items" id="cartItems">
