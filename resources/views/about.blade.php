@@ -22,7 +22,6 @@
                 Kupovine ugovaramo s mušterijama diljem Evrope.
             </p>
         </div>
-
     </div>
 </div>
 
